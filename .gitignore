@@ -1,0 +1,25 @@
+# Derleme çıktıları
+/build/
+/compile_commands.json
+
+# Derlenmiş dosyalar
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.exe
+*.ilk
+*.pdb
+
+# IDE ve editör özel dosyaları
+.vscode/
+.vs/
+.idea/
+*.suo
+*.user
+*.sln.docstates
+
+# Diğer
+/vendor/
