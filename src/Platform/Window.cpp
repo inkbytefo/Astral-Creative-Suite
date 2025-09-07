@@ -5,7 +5,9 @@
 
 namespace Astral {
     Window::Window(const std::string& title, uint32_t width, uint32_t height) {
-        if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        // SDL3: SDL_Init() returns bool (true=success, false=failure)
+        // NOT an integer like SDL2, so we use direct boolean check
+        if (!SDL_Init(SDL_INIT_VIDEO)) {
             throw std::runtime_error(std::string("SDL başlatılamadı: ") + SDL_GetError());
         }
 

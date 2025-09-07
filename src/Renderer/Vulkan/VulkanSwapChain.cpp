@@ -16,14 +16,22 @@ namespace Astral::Vulkan {
         createImageViews();
         createRenderPass();
         createFramebuffers();
+        m_maxFramesInFlight = m_swapChainImages.size(); // Dinamik frame sayısı ayarla
         createSyncObjects();
     }
 
     VulkanSwapChain::~VulkanSwapChain() {
-        for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++) {
-            vkDestroySemaphore(m_device.GetDevice(), m_renderFinishedSemaphores[i], nullptr);
-            vkDestroySemaphore(m_device.GetDevice(), m_imageAvailableSemaphores[i], nullptr);
-            vkDestroyFence(m_device.GetDevice(), m_inFlightFences[i], nullptr);
+        int framesInFlight = m_maxFramesInFlight;
+        for (int i = 0; i < framesInFlight; i++) {
+            if (i < m_imageAvailableSemaphores.size()) {
+                vkDestroySemaphore(m_device.GetDevice(), m_imageAvailableSemaphores[i], nullptr);
+            }
+            if (i < m_renderFinishedSemaphores.size()) {
+                vkDestroySemaphore(m_device.GetDevice(), m_renderFinishedSemaphores[i], nullptr);
+            }
+            if (i < m_inFlightFences.size()) {
+                vkDestroyFence(m_device.GetDevice(), m_inFlightFences[i], nullptr);
+            }
         }
 
         for (auto framebuffer : m_swapChainFramebuffers) {
@@ -192,54 +200,66 @@ namespace Astral::Vulkan {
     }
 
 void VulkanSwapChain::createSyncObjects() {
-        m_imageAvailableSemaphores.resize(MAX_FRAMES_IN_FLIGHT);
-        m_renderFinishedSemaphores.resize(MAX_FRAMES_IN_FLIGHT);
-        m_inFlightFences.resize(MAX_FRAMES_IN_FLIGHT);
+    // frame başına senkronizasyon nesneleri
+    m_imageAvailableSemaphores.resize(m_maxFramesInFlight);
+    m_renderFinishedSemaphores.resize(m_maxFramesInFlight);
+    m_inFlightFences.resize(m_maxFramesInFlight);
 
-        VkSemaphoreCreateInfo semaphoreInfo{};
-        semaphoreInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+    // swapchain image'ları için inFlight map
+    m_imagesInFlight.resize(m_swapChainImages.size(), VK_NULL_HANDLE);
 
-        VkFenceCreateInfo fenceInfo{};
-        fenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
-        fenceInfo.flags = VK_FENCE_CREATE_SIGNALED_BIT;
+    VkSemaphoreCreateInfo semaphoreInfo{};
+    semaphoreInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
 
-        for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++) {
-            if (vkCreateSemaphore(m_device.GetDevice(), &semaphoreInfo, nullptr, &m_imageAvailableSemaphores[i]) != VK_SUCCESS ||
-                vkCreateSemaphore(m_device.GetDevice(), &semaphoreInfo, nullptr, &m_renderFinishedSemaphores[i]) != VK_SUCCESS ||
-                vkCreateFence(m_device.GetDevice(), &fenceInfo, nullptr, &m_inFlightFences[i]) != VK_SUCCESS) {
-                throw std::runtime_error("Senkronizasyon nesneleri oluşturulamadı!");
-            }
+    VkFenceCreateInfo fenceInfo{};
+    fenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+    fenceInfo.flags = VK_FENCE_CREATE_SIGNALED_BIT; // başlangıçta sinyalli, ilk frame için beklemeyi atlatmak için
+
+    for (int i = 0; i < m_maxFramesInFlight; i++) {
+        if (vkCreateSemaphore(m_device.GetDevice(), &semaphoreInfo, nullptr, &m_imageAvailableSemaphores[i]) != VK_SUCCESS ||
+            vkCreateSemaphore(m_device.GetDevice(), &semaphoreInfo, nullptr, &m_renderFinishedSemaphores[i]) != VK_SUCCESS ||
+            vkCreateFence(m_device.GetDevice(), &fenceInfo, nullptr, &m_inFlightFences[i]) != VK_SUCCESS) {
+            throw std::runtime_error("Senkronizasyon nesneleri oluşturulamadı!");
         }
-        ASTRAL_LOG_INFO("Senkronizasyon nesneleri (semaphores/fences) başarıyla oluşturuldu.");
+    }
+    ASTRAL_LOG_INFO("Senkronizasyon nesneleri (semaphores/fences) başarıyla oluşturuldu.");
 }
 
     VkResult VulkanSwapChain::AcquireNextImage(uint32_t* imageIndex) {
-        // Mevcut çerçevenin kaynaklarının yeniden kullanılabilir hale gelmesi için GPU'nun bu çerçevenin işini bitirmesini bekle.
+        // Önce frame'in fence'ini bekle (previous submit tamamlanana kadar aynı frame id kullanmıyoruz)
         vkWaitForFences(m_device.GetDevice(), 1, &m_inFlightFences[m_currentFrame], VK_TRUE, UINT64_MAX);
+        vkResetFences(m_device.GetDevice(), 1, &m_inFlightFences[m_currentFrame]);
 
-        // Swapchain'den bir sonraki kullanılabilir görüntüyü al.
-        // Görüntü hazır olduğunda 'imageAvailableSemaphores[m_currentFrame]' sinyallenecek.
-        return vkAcquireNextImageKHR(
+        // Acquire: frame'e ait imageAvailable semaphore kullan
+        VkResult result = vkAcquireNextImageKHR(
             m_device.GetDevice(),
             m_swapChain,
             UINT64_MAX,
             m_imageAvailableSemaphores[m_currentFrame],
             VK_NULL_HANDLE,
             imageIndex);
+
+        return result;
     }
 
     VkResult VulkanSwapChain::SubmitCommandBuffers(const VkCommandBuffer* buffers, uint32_t* imageIndex) {
-        // Çizim komutlarını GPU'ya göndermeden önce, bu gönderimin tamamlandığını
-        // işaretleyecek olan çiti (fence) 'sinyalsiz' durumuna geri getiriyoruz.
-        vkResetFences(m_device.GetDevice(), 1, &m_inFlightFences[m_currentFrame]);
+        uint32_t currentImage = *imageIndex;
+        int currentFrame = m_currentFrame;
 
+        // Eğer bu görüntü GPU'da hâlâ inFlight ise onu tutan fence'i bekle (image reuse kontrolü)
+        if (m_imagesInFlight[currentImage] != VK_NULL_HANDLE) {
+            vkWaitForFences(m_device.GetDevice(), 1, &m_imagesInFlight[currentImage], VK_TRUE, UINT64_MAX);
+        }
+
+        // Bu image artık bu frame'in fence'i ile ilişkili olacak
+        m_imagesInFlight[currentImage] = m_inFlightFences[currentFrame];
+
+        // Submit hazırlığı: frame-semaphores kullan
         VkSubmitInfo submitInfo{};
         submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 
-        // GPU, çizime başlamadan önce hangi sinyali beklemeli?
-        // Görüntünün hazır olduğunu belirten 'imageAvailable' semaforunu.
-        VkSemaphore waitSemaphores[] = {m_imageAvailableSemaphores[m_currentFrame]};
-        VkPipelineStageFlags waitStages[] = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
+        VkSemaphore waitSemaphores[] = { m_imageAvailableSemaphores[currentFrame] };
+        VkPipelineStageFlags waitStages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
         submitInfo.waitSemaphoreCount = 1;
         submitInfo.pWaitSemaphores = waitSemaphores;
         submitInfo.pWaitDstStageMask = waitStages;
@@ -247,36 +267,30 @@ void VulkanSwapChain::createSyncObjects() {
         submitInfo.commandBufferCount = 1;
         submitInfo.pCommandBuffers = buffers;
 
-        // GPU, çizimi bitirdiğinde hangi sinyali göndermeli?
-        // Çizimin bittiğini belirten 'renderFinished' semaforunu.
-        VkSemaphore signalSemaphores[] = {m_renderFinishedSemaphores[m_currentFrame]};
+        VkSemaphore signalSemaphores[] = { m_renderFinishedSemaphores[currentFrame] };
         submitInfo.signalSemaphoreCount = 1;
         submitInfo.pSignalSemaphores = signalSemaphores;
 
-        // Komutları kuyruğa gönder. Bu işlem tamamlandığında 'inFlightFences[m_currentFrame]' çiti sinyallenecek.
-        if (vkQueueSubmit(m_device.GetGraphicsQueue(), 1, &submitInfo, m_inFlightFences[m_currentFrame]) != VK_SUCCESS) {
+        if (vkQueueSubmit(m_device.GetGraphicsQueue(), 1, &submitInfo, m_inFlightFences[currentFrame]) != VK_SUCCESS) {
             throw std::runtime_error("Komut tamponu gönderilemedi!");
         }
 
-        // Şimdi görüntüyü ekranda göstermek için sunum kuyruğuna bir istek gönderelim.
+        // Present: renderFinished semaphore'ını beklet
         VkPresentInfoKHR presentInfo{};
         presentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
-        
-        // Sunum motoru, görüntüyü ekrana basmadan önce hangi sinyali beklemeli?
-        // Çizimin bittiğini belirten 'renderFinished' semaforunu.
         presentInfo.waitSemaphoreCount = 1;
         presentInfo.pWaitSemaphores = signalSemaphores;
 
-        VkSwapchainKHR swapChains[] = {m_swapChain};
+        VkSwapchainKHR swapChains[] = { m_swapChain };
         presentInfo.swapchainCount = 1;
         presentInfo.pSwapchains = swapChains;
         presentInfo.pImageIndices = imageIndex;
 
-        auto result = vkQueuePresentKHR(m_device.GetPresentQueue(), &presentInfo);
+        VkResult result = vkQueuePresentKHR(m_device.GetPresentQueue(), &presentInfo);
 
-        // Bir sonraki çerçeve için indeksi ilerlet.
-        m_currentFrame = (m_currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
-        
+        // frame index ilerlet
+        m_currentFrame = (m_currentFrame + 1) % m_maxFramesInFlight;
+
         return result;
     }
 

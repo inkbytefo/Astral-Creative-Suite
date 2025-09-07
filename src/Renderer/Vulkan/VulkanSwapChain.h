@@ -52,7 +52,8 @@ namespace Astral::Vulkan {
         std::vector<VkSemaphore> m_imageAvailableSemaphores;
         std::vector<VkSemaphore> m_renderFinishedSemaphores;
         std::vector<VkFence> m_inFlightFences;
+        std::vector<VkFence> m_imagesInFlight; // her swapchain görüntüsü için hangi fence rezerve edildi
         uint32_t m_currentFrame = 0;
-        const int MAX_FRAMES_IN_FLIGHT = 2;
+        int m_maxFramesInFlight = 0; // Dinamik olarak swapchain image sayısına göre ayarlanır
     };
 }
