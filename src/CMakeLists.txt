@@ -4,6 +4,7 @@ add_library(AstralEngine STATIC
     Core/Logger.cpp
     Core/ConfigManager.cpp
     Core/AssetManager.cpp
+    Core/AssetLocator.cpp
     Core/ThreadPool.cpp
     Core/PerformanceMonitor.cpp
     Core/EngineConfig.cpp

@@ -1,5 +1,6 @@
 #include "Renderer/Model.h"
 #include "Core/Logger.h"
+#include "Core/AssetLocator.h"
 #include "Core/MemoryManager.h"
 #include "Core/PerformanceMonitor.h"
 #include "Core/AssetDependency.h"
@@ -16,8 +17,8 @@
 
 namespace AstralEngine {
 
-	Model::Model(Vulkan::VulkanDevice& device, const std::string& filepath)
-		: m_device(device), m_filepath(filepath) {
+    Model::Model(Vulkan::VulkanDevice& device, const std::string& filepath)
+        : m_device(device), m_filepath(AssetLocator::getInstance().resolveAssetPath(filepath)) {
 		
 		// Extract base directory using filesystem API for better path handling
 		std::filesystem::path modelPath(filepath);
@@ -47,7 +48,7 @@ namespace AstralEngine {
 
 		// Use member variable for directory
 		if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, filepath.c_str(), m_baseDirectory.c_str(), true)) {
-			AE_ERROR("Failed to load model '{}': {}", filepath, err);
+            AE_ERROR("Failed to load model '%s': %s", filepath.c_str(), err.c_str());
 			// Return early if model loading fails
 			return;
 		}
@@ -91,7 +92,7 @@ namespace AstralEngine {
 				}
 			}
 			
-			AE_DEBUG("Loaded material '{}' with {} texture dependencies", info.name, texPaths.size());
+            AE_DEBUG("Loaded material '%s' with %zu texture dependencies", info.name.c_str(), texPaths.size());
 		}
 
 		std::unordered_map<Vertex, uint32_t> uniqueVertices{};
@@ -155,8 +156,8 @@ namespace AstralEngine {
 				}
 				
 				m_subMeshes.emplace_back(shape.name, materialName, indexOffset, indexCount);
-				AE_DEBUG("Created submesh '{}' with material '{}': {} indices", 
-					     shape.name, materialName, indexCount);
+                AE_DEBUG("Created submesh '%s' with material '%s': %u indices", 
+                         shape.name.c_str(), materialName.c_str(), indexCount);
 			}
 		}
 

@@ -73,11 +73,11 @@ namespace AstralEngine {
         frameTimeTargetMs = 1000 / targetFrameRate;
         
         AE_INFO("Engine config validated and applied:");
-        AE_INFO("  Target FPS: {}, Max FPS: {}", targetFrameRate, maxFrameRate);
-        AE_INFO("  SwapChain timeout: {}ms", swapChainRecreationTimeoutMs);
-        AE_INFO("  Background SwapChain recreation: {}", enableBackgroundSwapChainRecreation);
-        AE_INFO("  Asset loading threads: {}", assetLoadingThreads);
-        AE_INFO("  Performance monitoring: {}", enablePerformanceMonitoring);
+        AE_INFO("  Target FPS: %u, Max FPS: %u", targetFrameRate, maxFrameRate);
+        AE_INFO("  SwapChain timeout: %ums", swapChainRecreationTimeoutMs);
+        AE_INFO("  Background SwapChain recreation: %s", enableBackgroundSwapChainRecreation ? "true" : "false");
+        AE_INFO("  Asset loading threads: %u", assetLoadingThreads);
+        AE_INFO("  Performance monitoring: %s", enablePerformanceMonitoring ? "true" : "false");
     }
     
     void EngineConfig::loadFromFile(const std::string& filepath) {

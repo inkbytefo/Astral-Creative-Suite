@@ -248,10 +248,14 @@ namespace AstralEngine {
         m_shaderManager = std::make_unique<MaterialShaderManager>(*m_context->device);
         
         // Initialize ShadowMapManager
+        AE_DEBUG("Attempting to initialize Shadow Map Manager...");
         m_shadowManager = std::make_unique<ShadowMapManager>(*m_context->device);
         if (!m_shadowManager->initialize({})) {
             AE_WARN("ShadowMapManager initialization failed; disabling shadows");
+            AE_INFO("Renderer will continue without shadow mapping support");
             m_shadowManager.reset();
+        } else {
+            AE_INFO("Shadow Map Manager initialized successfully");
         }
         
         m_context->swapChain = std::make_unique<Vulkan::VulkanSwapChain>(*m_context->device, m_window);
@@ -260,8 +264,27 @@ namespace AstralEngine {
         m_depthFormat = findSupportedDepthFormat();
         createDepthResources();
 
-        // Create shader
-        m_shader = std::make_unique<Shader>(*m_context->device, "shaders/basic.vert", "shaders/basic.frag");
+        // Create shader with comprehensive error handling
+        AE_DEBUG("Loading basic renderer shaders...");
+        try {
+            // Try primary PBR shaders first
+            m_shader = std::make_unique<Shader>(*m_context->device, "unified_pbr.vert", "unified_pbr.frag");
+            AE_INFO("PBR renderer shaders loaded successfully");
+        } catch (const std::exception& e1) {
+            AE_WARN("Failed to load PBR shaders: %s", e1.what());
+            AE_DEBUG("Falling back to basic shaders...");
+            
+            try {
+                // Fallback to basic shaders
+                m_shader = std::make_unique<Shader>(*m_context->device, "basic.vert", "unified_pbr.frag");
+                AE_INFO("Basic renderer shaders loaded successfully (fallback)");
+            } catch (const std::exception& e2) {
+                AE_ERROR("Failed to load basic renderer shaders: %s", e2.what());
+                AE_ERROR("Unable to load any compatible renderer shaders");
+                AE_ERROR("Please ensure shaders are compiled: compile_shaders.bat");
+                throw std::runtime_error("Critical shader loading failure - no compatible shaders found");
+            }
+        }
         
         // Create default white texture for materials
         createDefaultWhiteTexture();

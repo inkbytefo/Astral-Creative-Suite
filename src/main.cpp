@@ -1,5 +1,6 @@
 #include "Core/Logger.h"
 #include "Core/AssetManager.h"
+#include "Core/AssetLocator.h"
 #include "Core/PerformanceMonitor.h"
 #include "Core/EngineConfig.h"
 #include "Core/MemoryManager.h"
@@ -16,10 +17,19 @@
 int main(int argc, char* argv[]) {
     try {
         AE_INFO("Astral Engine Başlatılıyor...");
-        AE_DEBUG("Argümanlar: {} adet", argc);
+        AE_DEBUG("Argümanlar: %d adet", argc);
         
         // Logger'ı başlat
         AstralEngine::Logger::Init();
+        
+        // AssetLocator'ı initialize et (logger'dan sonra, diğerlerinden önce)
+        AstralEngine::AssetLocator::getInstance().initialize(argv[0]);
+        
+        // Critical assets'leri validate et
+        if (!AstralEngine::AssetLocator::getInstance().validateCriticalAssets()) {
+            AE_ERROR("Critical asset validation failed - cannot continue");
+            return -1;
+        }
         
         // Memory Manager'ı başlat
         AE_INFO("Memory Manager başlatılıyor...");
@@ -33,14 +43,14 @@ int main(int argc, char* argv[]) {
         // Performance monitoring'i başlat
         if (config.enablePerformanceMonitoring) {
             AstralEngine::PerformanceMonitor::setSlowOperationThreshold(config.slowOperationThresholdMs);
-            AE_INFO("Performance monitoring enabled (threshold: {:.1f}ms)", config.slowOperationThresholdMs);
+            AE_INFO("Performance monitoring enabled (threshold: %.1fms)", config.slowOperationThresholdMs);
         }
         
         // Hata ayıklama bilgisi
         AE_DEBUG("Debug modu etkin");
         AE_DEBUG("İşletim sistemi: Windows");
-        AE_DEBUG("CPU çekirdek sayısı: {}", std::thread::hardware_concurrency());
-        AE_DEBUG("Target FPS: {}, Max FPS: {}", config.targetFrameRate, config.maxFrameRate);
+        AE_DEBUG("CPU çekirdek sayısı: %u", std::thread::hardware_concurrency());
+        AE_DEBUG("Target FPS: %u, Max FPS: %u", config.targetFrameRate, config.maxFrameRate);
         
         // AssetManager'ı başlat
         AE_DEBUG("AssetManager başlatılıyor...");

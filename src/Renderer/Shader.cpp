@@ -1,5 +1,7 @@
 #include "Shader.h"
 #include "Renderer/Vulkan/VulkanDevice.h"
+#include "Core/AssetLocator.h"
+#include "Core/Logger.h"
 #include <fstream>
 #include <algorithm>
 
@@ -20,11 +22,16 @@ namespace AstralEngine {
 		return path + ".spv";
 	}
 
+	static std::string resolveShaderPath(const std::string& path) {
+		// Use AssetLocator for centralized path resolution
+		return AssetLocator::getInstance().resolveShaderPath(path);
+	}
+
 	Shader::Shader(Vulkan::VulkanDevice& device, const std::string& vertFilepath, const std::string& fragFilepath)
 		: m_device(device), m_hasFragmentShader(true) {
-		// Yalnızca SPIR-V yükle: .vert/.frag verilirse yanına .spv ekle
-		auto vertPath = toSpvPath(vertFilepath);
-		auto fragPath = toSpvPath(fragFilepath);
+		// Path'leri çözümle ve SPIR-V yükle
+		auto vertPath = toSpvPath(resolveShaderPath(vertFilepath));
+		auto fragPath = toSpvPath(resolveShaderPath(fragFilepath));
 
 		auto vertShaderCode = readFile(vertPath);
 		auto fragShaderCode = readFile(fragPath);
@@ -34,8 +41,8 @@ namespace AstralEngine {
 	
 	Shader::Shader(Vulkan::VulkanDevice& device, const std::string& vertFilepath)
 		: m_device(device), m_hasFragmentShader(false) {
-		// Depth-only shader - vertex shader only
-		auto vertPath = toSpvPath(vertFilepath);
+		// Depth-only shader - path'i çözümle ve vertex shader'i yükle
+		auto vertPath = toSpvPath(resolveShaderPath(vertFilepath));
 		auto vertShaderCode = readFile(vertPath);
 		m_vertShaderModule = createShaderModule(vertShaderCode);
 		m_fragShaderModule = VK_NULL_HANDLE;
@@ -54,7 +61,14 @@ namespace AstralEngine {
 		std::ifstream file(filepath, std::ios::ate | std::ios::binary);
 
 		if (!file.is_open()) {
-			throw std::runtime_error("failed to open file: " + filepath);
+			// Use AssetLocator for detailed error reporting
+			AE_ERROR("Failed to open shader file: %s", filepath.c_str());
+			AssetLocator::getInstance().logSearchPaths();
+			
+			std::string errorMsg = "Failed to open shader file: " + filepath;
+			errorMsg += "\nPlease check AssetLocator search paths in debug output above";
+			errorMsg += "\nEnsure shaders are compiled with: compile_shaders.bat";
+			throw std::runtime_error(errorMsg);
 		}
 
 		size_t fileSize = (size_t)file.tellg();

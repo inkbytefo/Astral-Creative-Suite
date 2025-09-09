@@ -35,16 +35,21 @@ bool ShadowMapManager::initialize(const ShadowConfig& config) {
         createShadowPipeline();
         
         AE_INFO("Shadow Map Manager initialized successfully");
-        AE_INFO("- Shadow map size: {}x{}", m_config.shadowMapSize, m_config.shadowMapSize);
-        AE_INFO("- Cascade count: {}", m_config.cascadeCount);
-        AE_INFO("- Filter mode: {}", static_cast<int>(m_config.filterMode));
+        AE_INFO("- Shadow map size: %ux%u", m_config.shadowMapSize, m_config.shadowMapSize);
+        AE_INFO("- Cascade count: %u", m_config.cascadeCount);
+        AE_INFO("- Filter mode: %d", static_cast<int>(m_config.filterMode));
         
         return true;
     } catch (const std::exception& e) {
         AE_ERROR("Failed to initialize Shadow Map Manager: {}", e.what());
         AE_ERROR("  - Make sure shadow shaders are compiled and available:");
-        AE_ERROR("    - Debug/shaders/shadow_depth.vert -> Debug/shaders/shadow_depth.vert.spv");
-        AE_ERROR("    - Check that Debug/shaders directory exists in working directory");
+        AE_ERROR("    - shadow_depth.vert -> shadow_depth.vert.spv");
+        AE_ERROR("    - Check shader paths: ./, shaders/, ../shaders/");
+        AE_ERROR("  - Shader search locations attempted:");
+        AE_ERROR("    1. Current working directory");
+        AE_ERROR("    2. ./shaders/ subdirectory");
+        AE_ERROR("    3. ../shaders/ parent directory");
+        AE_ERROR("  - If shaders are missing, run shader compilation build step");
         
         // Clean up any partial initialization
         shutdown();
@@ -164,7 +169,7 @@ void ShadowMapManager::createShadowMap() {
         throw std::runtime_error("Failed to create shadow map image view!");
     }
     
-    AE_DEBUG("Created shadow map: {}x{} with {} cascades", 
+    AE_DEBUG("Created shadow map: %ux%u with %u cascades", 
              m_config.shadowMapSize, m_config.shadowMapSize, m_config.cascadeCount);
 }
 
@@ -231,7 +236,7 @@ void ShadowMapManager::createShadowUBO() {
     m_shadowUBO->copyTo(&shadowData, sizeof(ShadowUBO));
     m_shadowUBO->unmap();
     
-    AE_DEBUG("Created shadow UBO with {} bytes", sizeof(ShadowUBO));
+    AE_DEBUG("Created shadow UBO with %zu bytes", sizeof(ShadowUBO));
 }
 
 void ShadowMapManager::createRenderPass() {
@@ -325,17 +330,17 @@ void ShadowMapManager::createFramebuffers() {
             throw std::runtime_error("Failed to create shadow framebuffer!");
         }
         
-        AE_DEBUG("Created framebuffer for cascade {}", i);
+        AE_DEBUG("Created framebuffer for cascade %u", i);
     }
     
-    AE_DEBUG("Created {} shadow framebuffers", m_framebuffers.size());
+    AE_DEBUG("Created %zu shadow framebuffers", m_framebuffers.size());
 }
 
 void ShadowMapManager::beginShadowPass(VkCommandBuffer commandBuffer, uint32_t cascadeIndex) {
     m_currentCascade = cascadeIndex;
     
     if (cascadeIndex >= m_framebuffers.size()) {
-        AE_ERROR("Invalid cascade index: {} (max: {})", cascadeIndex, m_framebuffers.size() - 1);
+        AE_ERROR("Invalid cascade index: %u (max: %zu)", cascadeIndex, m_framebuffers.size() - 1);
         return;
     }
     
@@ -537,11 +542,11 @@ void ShadowMapManager::calculateDirectionalLightCascades(
             settings.tightZ
         );
         
-        AE_DEBUG("Cascade {}: range=[{:.2f}, {:.2f}], bounds=({:.1f},{:.1f}) to ({:.1f},{:.1f})",
+        AE_DEBUG("Cascade %zu: range=[%.2f, %.2f], bounds=(%.1f,%.1f) to (%.1f,%.1f)",
                  i, splitNear, splitFar, minLS.x, minLS.y, maxLS.x, maxLS.y);
     }
     
-    AE_DEBUG("Calculated {} tight-fitting shadow cascades", shadowData.activeCascadeCount);
+    AE_DEBUG("Calculated %u tight-fitting shadow cascades", shadowData.activeCascadeCount);
 }
 
 // Compatibility implementation for deprecated getFrustumCornersWorldSpace
@@ -581,9 +586,9 @@ void ShadowMapManager::setConfig(const ShadowConfig& config) {
 
 void ShadowMapManager::printDebugInfo() const {
     AE_INFO("=== Shadow Map Manager Debug Info ===");
-    AE_INFO("Shadow map size: {}x{}", m_config.shadowMapSize, m_config.shadowMapSize);
-    AE_INFO("Cascade count: {}", m_config.cascadeCount);
-    AE_INFO("Max shadow distance: {:.1f}", m_config.maxShadowDistance);
+    AE_INFO("Shadow map size: %ux%u", m_config.shadowMapSize, m_config.shadowMapSize);
+    AE_INFO("Cascade count: %u", m_config.cascadeCount);
+    AE_INFO("Max shadow distance: %.1f", m_config.maxShadowDistance);
     AE_INFO("====================================");
 }
 
@@ -608,8 +613,9 @@ void ShadowMapManager::createShadowPipeline() {
         throw std::runtime_error("Failed to create shadow pipeline layout!");
     }
     
-    // Load depth-only shaders
-    Shader depthShader(m_device, "Debug/shaders/shadow_depth.vert"); // Depth-only vertex shader
+    // Load depth-only shaders - try multiple paths
+    AE_DEBUG("Loading shadow depth shader: shadow_depth.vert");
+    Shader depthShader(m_device, "shadow_depth.vert"); // Depth-only vertex shader
     
     // Vertex input description (same as main renderer)
     VkVertexInputBindingDescription bindingDescription{};
@@ -1117,7 +1123,7 @@ void ShadowRenderer::renderShadowMaps(
     const std::vector<class RenderObject>& objects
 ) {
     // Stub - TODO: Implement shadow rendering
-    AE_DEBUG("Rendering shadow maps for {} lights", lightShadows.size());
+    AE_DEBUG("Rendering shadow maps for %zu lights", lightShadows.size());
 }
 
 void ShadowRenderer::bindShadowResources(

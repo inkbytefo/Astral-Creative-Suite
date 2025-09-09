@@ -31,8 +31,8 @@ namespace AstralEngine {
         
         // Log slow operations
         if (timeMs > s_slowThreshold.load()) {
-            AE_WARN("Slow operation '{}': {:.2f}ms (avg: {:.2f}ms, calls: {})", 
-                   operation, timeMs, avgTime, callCount);
+            AE_WARN("Slow operation '%s': %.2fms (avg: %.2fms, calls: %d)", 
+                   operation.c_str(), timeMs, avgTime, callCount);
         }
     }
     
@@ -48,14 +48,14 @@ namespace AstralEngine {
         AE_INFO("=== Performance Statistics ===");
         for (const auto& [operation, avgTime] : s_avgTimes) {
             int callCount = s_callCounts[operation];
-            AE_INFO("  {}: {:.2f}ms avg ({} calls)", operation, avgTime, callCount);
+            AE_INFO("  %s: %.2fms avg (%d calls)", operation.c_str(), avgTime, callCount);
         }
         AE_INFO("==============================");
     }
     
     void PerformanceMonitor::setSlowOperationThreshold(float thresholdMs) {
         s_slowThreshold.store(thresholdMs);
-        AE_DEBUG("Performance threshold set to {:.1f}ms", thresholdMs);
+        AE_DEBUG("Performance threshold set to %.1fms", thresholdMs);
     }
     
     // Timer implementation
