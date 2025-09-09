@@ -45,9 +45,6 @@ add_library(AstralEngine STATIC
     Renderer/ShadowMapping.cpp
     Renderer/MaterialShaderManager.cpp
     
-    # Test utilities
-    MinimalRenderer.cpp
-    
     # Legacy Entity system removed - use ArchetypeECS instead
 )
 
