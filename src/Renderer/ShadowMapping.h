@@ -132,6 +132,10 @@ namespace AstralEngine {
         // Descriptor set layout access for pipeline creation
         VkDescriptorSetLayout getDescriptorSetLayout() const { return m_descriptorSetLayout; }
         
+        // Shadow descriptor set management (for Set 2)
+        VkDescriptorSet getDescriptorSet(uint32_t frameIndex) const;
+        void ensureShadowDescriptorSets(uint32_t count);
+        
         // Configuration
         void setConfig(const ShadowConfig& config);
         const ShadowConfig& getConfig() const { return m_config; }
@@ -186,6 +190,10 @@ namespace AstralEngine {
         // Shadow UBO and descriptor set resources
         std::unique_ptr<Vulkan::VulkanBuffer> m_shadowUBO;
         VkDescriptorSetLayout m_descriptorSetLayout = VK_NULL_HANDLE;
+        
+        // Shadow descriptor sets (Set 2 - for shadow sampling)
+        VkDescriptorPool m_shadowDescriptorPool = VK_NULL_HANDLE;
+        std::vector<VkDescriptorSet> m_shadowDescriptorSets;
         
         // Shadow map array (for multiple cascades)
         bool m_useArrayTexture = true;

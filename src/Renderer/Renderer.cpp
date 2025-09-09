@@ -322,6 +322,12 @@ namespace AstralEngine {
         createUniformBuffers();
         createDescriptorPool();
         createDescriptorSets();
+        
+        // Create shadow descriptor sets if shadow manager is available
+        if (m_shadowManager) {
+            m_shadowManager->ensureShadowDescriptorSets(static_cast<uint32_t>(getSwapChainImageCount()));
+        }
+        
         createCommandBuffers();
     }
 
@@ -481,6 +487,12 @@ namespace AstralEngine {
         createUniformBuffers();
         createDescriptorPool();
         createDescriptorSets();
+        
+        // Recreate shadow descriptor sets if shadow manager is available
+        if (m_shadowManager) {
+            m_shadowManager->ensureShadowDescriptorSets(static_cast<uint32_t>(getSwapChainImageCount()));
+        }
+        
         createCommandBuffers();
         
         // Mark command buffers as dirty since we recreated them
@@ -1412,6 +1424,12 @@ namespace AstralEngine {
                 createUniformBuffers();
                 createDescriptorPool();
                 createDescriptorSets();
+                
+                // Recreate shadow descriptor sets if shadow manager is available
+                if (m_shadowManager) {
+                    m_shadowManager->ensureShadowDescriptorSets(static_cast<uint32_t>(getSwapChainImageCount()));
+                }
+                
                 createCommandBuffers();
                 
                 // Mark command buffers as dirty since we recreated them
@@ -1695,6 +1713,16 @@ namespace AstralEngine {
                 vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS,
                                       batch.pipeline->getPipelineLayout(), 1, 1, 
                                       &m_materialDescriptorSets[imageIndex], 0, nullptr);
+            }
+            
+            // Bind shadow descriptor set (set 2)
+            if (m_shadowManager) {
+                VkDescriptorSet shadowSet = m_shadowManager->getDescriptorSet(imageIndex);
+                if (shadowSet != VK_NULL_HANDLE) {
+                    vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS,
+                                          batch.pipeline->getPipelineLayout(), 2, 1, 
+                                          &shadowSet, 0, nullptr);
+                }
             }
             
             // Render all items in this batch

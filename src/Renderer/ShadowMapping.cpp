@@ -122,6 +122,13 @@ void ShadowMapManager::shutdown() {
         m_descriptorSetLayout = VK_NULL_HANDLE;
     }
     
+    // Clean up shadow descriptor pool
+    if (m_shadowDescriptorPool != VK_NULL_HANDLE) {
+        vkDestroyDescriptorPool(device, m_shadowDescriptorPool, nullptr);
+        m_shadowDescriptorPool = VK_NULL_HANDLE;
+    }
+    m_shadowDescriptorSets.clear();
+    
     // Clean up UBO
     m_shadowUBO.reset();
     
@@ -808,6 +815,99 @@ void ShadowMapManager::bindShadowPipeline(VkCommandBuffer commandBuffer) {
 
 VkPipelineLayout ShadowMapManager::getShadowPipelineLayout() const {
     return m_pipelineLayout;
+}
+
+VkDescriptorSet ShadowMapManager::getDescriptorSet(uint32_t frameIndex) const {
+    if (frameIndex >= m_shadowDescriptorSets.size()) {
+        AE_ERROR("Invalid shadow descriptor set index: {} (max: {})", frameIndex, m_shadowDescriptorSets.size());
+        return VK_NULL_HANDLE;
+    }
+    return m_shadowDescriptorSets[frameIndex];
+}
+
+void ShadowMapManager::ensureShadowDescriptorSets(uint32_t count) {
+    AE_DEBUG("Creating shadow descriptor sets (count={})", count);
+    
+    VkDevice device = m_device.getDevice();
+    
+    // Clean up existing pool if it exists
+    if (m_shadowDescriptorPool != VK_NULL_HANDLE) {
+        vkDestroyDescriptorPool(device, m_shadowDescriptorPool, nullptr);
+        m_shadowDescriptorPool = VK_NULL_HANDLE;
+    }
+    m_shadowDescriptorSets.clear();
+    
+    if (count == 0) {
+        return;
+    }
+    
+    // Create descriptor pool
+    std::array<VkDescriptorPoolSize, 2> poolSizes{};
+    poolSizes[0].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    poolSizes[0].descriptorCount = count;
+    poolSizes[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+    poolSizes[1].descriptorCount = count;
+    
+    VkDescriptorPoolCreateInfo poolInfo{};
+    poolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+    poolInfo.poolSizeCount = static_cast<uint32_t>(poolSizes.size());
+    poolInfo.pPoolSizes = poolSizes.data();
+    poolInfo.maxSets = count;
+    
+    VkResult result = vkCreateDescriptorPool(device, &poolInfo, nullptr, &m_shadowDescriptorPool);
+    if (result != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create shadow descriptor pool!");
+    }
+    
+    // Allocate descriptor sets
+    std::vector<VkDescriptorSetLayout> layouts(count, m_descriptorSetLayout);
+    VkDescriptorSetAllocateInfo allocInfo{};
+    allocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+    allocInfo.descriptorPool = m_shadowDescriptorPool;
+    allocInfo.descriptorSetCount = count;
+    allocInfo.pSetLayouts = layouts.data();
+    
+    m_shadowDescriptorSets.resize(count);
+    result = vkAllocateDescriptorSets(device, &allocInfo, m_shadowDescriptorSets.data());
+    if (result != VK_SUCCESS) {
+        throw std::runtime_error("Failed to allocate shadow descriptor sets!");
+    }
+    
+    // Update descriptor sets
+    for (uint32_t i = 0; i < count; ++i) {
+        std::array<VkWriteDescriptorSet, 2> descriptorWrites{};
+        
+        // Binding 0: Shadow UBO
+        VkDescriptorBufferInfo bufferInfo{};
+        bufferInfo.buffer = m_shadowUBO->getBuffer();
+        bufferInfo.offset = 0;
+        bufferInfo.range = sizeof(ShadowUBO);
+        
+        descriptorWrites[0].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+        descriptorWrites[0].dstSet = m_shadowDescriptorSets[i];
+        descriptorWrites[0].dstBinding = 0;
+        descriptorWrites[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+        descriptorWrites[0].descriptorCount = 1;
+        descriptorWrites[0].pBufferInfo = &bufferInfo;
+        
+        // Binding 1: Shadow map sampler
+        VkDescriptorImageInfo imageInfo{};
+        imageInfo.imageLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
+        imageInfo.imageView = m_shadowMapView;
+        imageInfo.sampler = m_shadowSampler;
+        
+        descriptorWrites[1].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+        descriptorWrites[1].dstSet = m_shadowDescriptorSets[i];
+        descriptorWrites[1].dstBinding = 1;
+        descriptorWrites[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+        descriptorWrites[1].descriptorCount = 1;
+        descriptorWrites[1].pImageInfo = &imageInfo;
+        
+        vkUpdateDescriptorSets(device, static_cast<uint32_t>(descriptorWrites.size()),
+                              descriptorWrites.data(), 0, nullptr);
+    }
+    
+    AE_DEBUG("Created {} shadow descriptor sets", count);
 }
 
 // ============================================================================
