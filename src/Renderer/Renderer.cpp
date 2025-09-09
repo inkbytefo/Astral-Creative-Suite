@@ -295,7 +295,11 @@ namespace AstralEngine {
 
         // Create rendering pipeline with shader modules
         {
+            // FIXED: Include all three descriptor set layouts (Scene, Material, Shadow)
             std::vector<VkDescriptorSetLayout> setLayouts = { m_sceneSetLayout, m_materialSetLayout };
+            if (m_shadowManager) {
+                setLayouts.push_back(m_shadowManager->getDescriptorSetLayout()); // Add shadow layout (Set 2)
+            }
             m_pipeline = std::make_unique<Vulkan::VulkanPipeline>(
                 *m_context->device, 
                 setLayouts,
@@ -458,7 +462,11 @@ namespace AstralEngine {
 
         // Recreate pipeline
         {
+            // FIXED: Include all three descriptor set layouts (Scene, Material, Shadow)
             std::vector<VkDescriptorSetLayout> setLayouts = { m_sceneSetLayout, m_materialSetLayout };
+            if (m_shadowManager) {
+                setLayouts.push_back(m_shadowManager->getDescriptorSetLayout()); // Add shadow layout (Set 2)
+            }
             m_pipeline = std::make_unique<AstralEngine::Vulkan::VulkanPipeline>(
                 *m_context->device, 
                 setLayouts,
@@ -867,12 +875,31 @@ namespace AstralEngine {
         AE_INFO("Vulkan yüzeyi başarıyla oluşturuldu.");
     }
 
+    /**
+     * Creates descriptor set layouts for the unified rendering pipeline.
+     * 
+     * DESCRIPTOR SET LAYOUT CONTRACT (FIXED - January 2025):
+     * ============================================================
+     * Set 0 (Scene): Global scene data
+     *   - Binding 0: Scene UBO (view/projection matrices) - accessible in vertex & fragment shaders
+     * 
+     * Set 1 (Material): Per-material data and textures  
+     *   - Binding 0:    Material UBO (PBR parameters, flags)
+     *   - Bindings 1-16: Texture samplers for all TextureSlot enum values
+     *                   (BaseColor, Normal, MetallicRoughness, Occlusion, Emissive, etc.)
+     * 
+     * Set 2 (Shadow): Shadow mapping resources (managed by ShadowMapManager)
+     *   - Binding 0: Shadow UBO (light matrices, cascade data)
+     *   - Binding 1: Shadow map array sampler (cascaded shadow maps)
+     * 
+     * This layout MUST match shader expectations and descriptor set writes!
+     */
     void Renderer::createDescriptorSetLayouts() {
-        VkDescriptorSetLayoutBinding uboLayoutBinding{};
-        uboLayoutBinding.binding = 0;
-        uboLayoutBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-        uboLayoutBinding.descriptorCount = 1;
-        uboLayoutBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+    VkDescriptorSetLayoutBinding uboLayoutBinding{};
+    uboLayoutBinding.binding = 0;
+    uboLayoutBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    uboLayoutBinding.descriptorCount = 1;
+    uboLayoutBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
 
         VkDescriptorSetLayoutCreateInfo layoutInfo{};
         layoutInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
@@ -883,20 +910,30 @@ namespace AstralEngine {
             throw std::runtime_error("Scene descriptor set layout oluşturulamadı!");
         }
 
-        // Material set layout (set = 1)
-        VkDescriptorSetLayoutBinding samplerBinding{};
-        samplerBinding.binding = 0;
-        samplerBinding.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-        samplerBinding.descriptorCount = 1;
-        samplerBinding.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
-
+        // Material set layout (set = 1) - FIXED to match UnifiedMaterialInstance layout
+        // Binding 0: Material UBO
+        // Bindings 1-16: Texture samplers for all texture slots
+        std::vector<VkDescriptorSetLayoutBinding> matBindings;
+        
+        // Binding 0: UnifiedMaterialUBO
         VkDescriptorSetLayoutBinding materialUboBinding{};
-        materialUboBinding.binding = 1;
+        materialUboBinding.binding = 0;
         materialUboBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
         materialUboBinding.descriptorCount = 1;
-        materialUboBinding.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
-
-        std::vector<VkDescriptorSetLayoutBinding> matBindings = { samplerBinding, materialUboBinding };
+        materialUboBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT; // Both stages can access material data
+        materialUboBinding.pImmutableSamplers = nullptr;
+        matBindings.push_back(materialUboBinding);
+        
+        // Bindings 1-16: Texture Samplers for all texture slots
+        for (uint32_t i = 0; i < static_cast<uint32_t>(TextureSlot::Count); ++i) {
+            VkDescriptorSetLayoutBinding samplerBinding{};
+            samplerBinding.binding = 1 + i; // Bindings start from 1
+            samplerBinding.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+            samplerBinding.descriptorCount = 1;
+            samplerBinding.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+            samplerBinding.pImmutableSamplers = nullptr;
+            matBindings.push_back(samplerBinding);
+        }
 
         VkDescriptorSetLayoutCreateInfo matLayoutInfo{};
         matLayoutInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
@@ -905,6 +942,8 @@ namespace AstralEngine {
         if (vkCreateDescriptorSetLayout(m_context->device->getDevice(), &matLayoutInfo, nullptr, &m_materialSetLayout) != VK_SUCCESS) {
             throw std::runtime_error("Material descriptor set layout oluşturulamadı!");
         }
+        
+        AE_INFO("Created material descriptor set layout with UBO at binding 0 and %u texture slots", static_cast<uint32_t>(TextureSlot::Count));
     }
 
     void Renderer::createUniformBuffers() {
@@ -1061,19 +1100,23 @@ namespace AstralEngine {
     }
 
     void Renderer::createMaterialDescriptorPool() {
-        // For unified material system, we need more descriptors to handle all texture slots
+        // UPDATED: For unified material system, we need more descriptors to handle all texture slots
         std::vector<VkDescriptorPoolSize> poolSizes;
         
-        // UBO for each swapchain image
+        const uint32_t imageCount = static_cast<uint32_t>(m_context->swapChain->getImageCount());
+        const uint32_t textureSlotCount = static_cast<uint32_t>(TextureSlot::Count);
+        const uint32_t maxMaterials = 100; // Estimate for concurrent materials
+        
+        // UBO for each material instance per swapchain image - significantly increased
         poolSizes.push_back({
             VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, 
-            static_cast<uint32_t>(m_context->swapChain->getImageCount())
+            imageCount * maxMaterials // Each material needs a UBO per frame
         });
         
-        // Texture samplers - support for up to 16 texture slots per material per swapchain image
+        // Texture samplers - support for all texture slots per material per swapchain image
         poolSizes.push_back({
             VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 
-            static_cast<uint32_t>(m_context->swapChain->getImageCount() * static_cast<uint32_t>(TextureSlot::Count))
+            imageCount * maxMaterials * textureSlotCount // Much larger pool for all texture bindings
         });
 
         VkDescriptorPoolCreateInfo poolInfo{};
@@ -1081,13 +1124,14 @@ namespace AstralEngine {
         poolInfo.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT; // Allow freeing individual sets
         poolInfo.poolSizeCount = static_cast<uint32_t>(poolSizes.size());
         poolInfo.pPoolSizes = poolSizes.data();
-        poolInfo.maxSets = static_cast<uint32_t>(m_context->swapChain->getImageCount() * 100); // Support many materials
+        poolInfo.maxSets = imageCount * maxMaterials; // Support many materials - each material needs one set per frame
         
         if (vkCreateDescriptorPool(m_context->device->getDevice(), &poolInfo, nullptr, &m_materialDescriptorPool) != VK_SUCCESS) {
             throw std::runtime_error("Failed to create unified material descriptor pool!");
         }
         
-        AE_INFO("Created unified material descriptor pool with {} texture slots", static_cast<uint32_t>(TextureSlot::Count));
+        AE_INFO("Created unified material descriptor pool with {} texture slots, {} max materials, {} max sets", 
+                textureSlotCount, maxMaterials, imageCount * maxMaterials);
     }
 
     void Renderer::createMaterialDescriptorSets() {
@@ -1129,38 +1173,46 @@ namespace AstralEngine {
             memcpy(bufferData, &defaultMaterialData, sizeof(UnifiedMaterialUBO));
             vmaUnmapMemory(m_context->device->getAllocator(), m_defaultMaterialBuffers[i].getAllocation());
             
-            // Setup descriptor writes
-            VkDescriptorImageInfo imageInfo{};
-            imageInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-            imageInfo.imageView = m_defaultWhiteImageView;
-            imageInfo.sampler = m_defaultWhiteTextureSampler;
+            // CRITICAL FIX: Setup descriptor writes to match NEW layout
+            // Binding 0: Material UBO
+            // Bindings 1-16: Texture samplers
             
             VkDescriptorBufferInfo materialBufferInfo{};
             materialBufferInfo.buffer = m_defaultMaterialBuffers[i].getBuffer();
             materialBufferInfo.offset = 0;
             materialBufferInfo.range = sizeof(UnifiedMaterialUBO);
 
-            VkWriteDescriptorSet writes[2]{};
+            // Prepare image info for all texture slots (using default white texture)
+            VkDescriptorImageInfo imageInfo{};
+            imageInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+            imageInfo.imageView = m_defaultWhiteImageView;
+            imageInfo.sampler = m_defaultWhiteTextureSampler;
             
-            // Texture binding (binding 0)
+            // Create writes for UBO + all texture slots
+            const uint32_t textureSlotCount = static_cast<uint32_t>(TextureSlot::Count);
+            std::vector<VkWriteDescriptorSet> writes(1 + textureSlotCount);
+            
+            // BINDING 0: Material UBO (FIXED)
             writes[0].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
             writes[0].dstSet = m_materialDescriptorSets[i];
-            writes[0].dstBinding = 0;
+            writes[0].dstBinding = 0; // UBO at binding 0
             writes[0].dstArrayElement = 0;
-            writes[0].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+            writes[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
             writes[0].descriptorCount = 1;
-            writes[0].pImageInfo = &imageInfo;
+            writes[0].pBufferInfo = &materialBufferInfo;
             
-            // Material UBO binding (binding 1)
-            writes[1].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-            writes[1].dstSet = m_materialDescriptorSets[i];
-            writes[1].dstBinding = 1;
-            writes[1].dstArrayElement = 0;
-            writes[1].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-            writes[1].descriptorCount = 1;
-            writes[1].pBufferInfo = &materialBufferInfo;
+            // BINDINGS 1-16: Texture samplers (FIXED)
+            for (uint32_t slot = 0; slot < textureSlotCount; ++slot) {
+                writes[1 + slot].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+                writes[1 + slot].dstSet = m_materialDescriptorSets[i];
+                writes[1 + slot].dstBinding = 1 + slot; // Textures start at binding 1
+                writes[1 + slot].dstArrayElement = 0;
+                writes[1 + slot].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+                writes[1 + slot].descriptorCount = 1;
+                writes[1 + slot].pImageInfo = &imageInfo; // All use default white texture
+            }
 
-            vkUpdateDescriptorSets(m_context->device->getDevice(), 2, writes, 0, nullptr);
+            vkUpdateDescriptorSets(m_context->device->getDevice(), static_cast<uint32_t>(writes.size()), writes.data(), 0, nullptr);
         }
     }
 
@@ -1341,7 +1393,11 @@ namespace AstralEngine {
                 
                 // Recreate pipeline
                 {
+                    // FIXED: Include all three descriptor set layouts (Scene, Material, Shadow)
                     std::vector<VkDescriptorSetLayout> setLayouts = { m_sceneSetLayout, m_materialSetLayout };
+                    if (m_shadowManager) {
+                        setLayouts.push_back(m_shadowManager->getDescriptorSetLayout()); // Add shadow layout (Set 2)
+                    }
                     m_pipeline = std::make_unique<AstralEngine::Vulkan::VulkanPipeline>(
                         *m_context->device, 
                         setLayouts,
@@ -1497,7 +1553,11 @@ namespace AstralEngine {
                     m_pipelineCacheMisses.fetch_add(1, std::memory_order_relaxed);
                     try {
                         const PipelineConfig pipelineConfig = batch.material->getPipelineConfig();
+                        // FIXED: Include all three descriptor set layouts (Scene, Material, Shadow)
                         std::vector<VkDescriptorSetLayout> setLayouts = { m_sceneSetLayout, m_materialSetLayout };
+                        if (m_shadowManager) {
+                            setLayouts.push_back(m_shadowManager->getDescriptorSetLayout()); // Add shadow layout (Set 2)
+                        }
                         auto pipeline = std::make_shared<Vulkan::VulkanPipeline>(
                             *m_context->device,
                             setLayouts,

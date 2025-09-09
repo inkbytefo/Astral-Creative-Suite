@@ -30,6 +30,7 @@ bool ShadowMapManager::initialize(const ShadowConfig& config) {
         createShadowMap();
         createShadowSampler();
         createShadowUBO();
+        createDescriptorSetLayout();
         createRenderPass();
         createFramebuffers();
         createShadowPipeline();
@@ -113,6 +114,12 @@ void ShadowMapManager::shutdown() {
         vmaDestroyImage(m_device.getAllocator(), m_shadowMapImage, m_shadowMapAllocation);
         m_shadowMapImage = VK_NULL_HANDLE;
         m_shadowMapAllocation = VK_NULL_HANDLE;
+    }
+    
+    // Clean up descriptor set layout
+    if (m_descriptorSetLayout != VK_NULL_HANDLE) {
+        vkDestroyDescriptorSetLayout(device, m_descriptorSetLayout, nullptr);
+        m_descriptorSetLayout = VK_NULL_HANDLE;
     }
     
     // Clean up UBO
@@ -237,6 +244,41 @@ void ShadowMapManager::createShadowUBO() {
     m_shadowUBO->unmap();
     
     AE_DEBUG("Created shadow UBO with %zu bytes", sizeof(ShadowUBO));
+}
+
+void ShadowMapManager::createDescriptorSetLayout() {
+    AE_DEBUG("Creating shadow descriptor set layout");
+    
+    // Shadow descriptor set layout (Set 2):
+    // Binding 0: ShadowUBO (uniform buffer)
+    // Binding 1: Shadow map sampler (combined image sampler)
+    std::vector<VkDescriptorSetLayoutBinding> bindings(2);
+    
+    // Binding 0: Shadow UBO
+    bindings[0].binding = 0;
+    bindings[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    bindings[0].descriptorCount = 1;
+    bindings[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
+    bindings[0].pImmutableSamplers = nullptr;
+    
+    // Binding 1: Shadow map array sampler
+    bindings[1].binding = 1;
+    bindings[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+    bindings[1].descriptorCount = 1;
+    bindings[1].stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+    bindings[1].pImmutableSamplers = nullptr;
+    
+    VkDescriptorSetLayoutCreateInfo layoutInfo{};
+    layoutInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+    layoutInfo.bindingCount = static_cast<uint32_t>(bindings.size());
+    layoutInfo.pBindings = bindings.data();
+    
+    VkResult result = vkCreateDescriptorSetLayout(m_device.getDevice(), &layoutInfo, nullptr, &m_descriptorSetLayout);
+    if (result != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create shadow descriptor set layout!");
+    }
+    
+    AE_DEBUG("Created shadow descriptor set layout with %zu bindings", bindings.size());
 }
 
 void ShadowMapManager::createRenderPass() {

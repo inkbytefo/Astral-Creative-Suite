@@ -1,11 +1,11 @@
 #version 450
 
-// Inputs
+// Inputs - FIXED: Removed inBitangent (location 5) since vertex data no longer provides it
 layout(location = 0) in vec3 inPosition;
-layout(location = 1) in vec3 inNormal;
-layout(location = 2) in vec2 inTexCoord;
-layout(location = 3) in vec3 inTangent;
-layout(location = 4) in vec3 inBitangent;
+layout(location = 1) in vec3 inColor;     // Color at location 1 (from vertex data)
+layout(location = 2) in vec3 inNormal;
+layout(location = 3) in vec2 inTexCoord;
+layout(location = 4) in vec3 inTangent;
 
 // Outputs to fragment shader
 layout(location = 0) out vec3 fragWorldPos;
@@ -47,7 +47,8 @@ void main() {
     mat3 normalMatrix = transpose(inverse(mat3(pc.model)));
     fragNormal = normalize(normalMatrix * inNormal);
     fragTangent = normalize(normalMatrix * inTangent);
-    fragBitangent = normalize(normalMatrix * inBitangent);
+    // Calculate bitangent from normal and tangent (since it's not provided in vertex data anymore)
+    fragBitangent = normalize(cross(fragNormal, fragTangent));
 
     // Pass UVs
     fragTexCoord = inTexCoord;

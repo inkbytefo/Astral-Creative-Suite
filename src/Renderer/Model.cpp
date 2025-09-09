@@ -439,8 +439,8 @@ void Model::DrawSubMesh(VkCommandBuffer commandBuffer, size_t submeshIndex) {
 	}
 
 	std::vector<VkVertexInputAttributeDescription> Vertex::getAttributeDescriptions() {
-		// Altı özelliğimiz var: position, color, normal, texCoord, tangent, bitangent
-		std::vector<VkVertexInputAttributeDescription> attributeDescriptions(6);
+		// Beş özelliğimiz var: position, color, normal, texCoord, tangent (bitangent shader'da kullanılmıyor)
+		std::vector<VkVertexInputAttributeDescription> attributeDescriptions(5);
 
 		// Konum (Position) -> layout(location = 0)
 		attributeDescriptions[0].binding = 0;
@@ -466,20 +466,12 @@ void Model::DrawSubMesh(VkCommandBuffer commandBuffer, size_t submeshIndex) {
 		attributeDescriptions[3].format = VK_FORMAT_R32G32_SFLOAT; // glm::vec2
 		attributeDescriptions[3].offset = offsetof(Vertex, texCoord);
 
-		// Add tangent and bitangent for PBR rendering
-		attributeDescriptions.resize(6); // Position, Color, Normal, TexCoord, Tangent, Bitangent
-		
+		// Add tangent for PBR rendering (bitangent calculated in shader)
 		// Tangent -> layout(location = 4)
 		attributeDescriptions[4].binding = 0;
 		attributeDescriptions[4].location = 4;
 		attributeDescriptions[4].format = VK_FORMAT_R32G32B32_SFLOAT; // glm::vec3
 		attributeDescriptions[4].offset = offsetof(Vertex, tangent);
-		
-		// Bitangent -> layout(location = 5)
-		attributeDescriptions[5].binding = 0;
-		attributeDescriptions[5].location = 5;
-		attributeDescriptions[5].format = VK_FORMAT_R32G32B32_SFLOAT; // glm::vec3
-		attributeDescriptions[5].offset = offsetof(Vertex, bitangent);
 
 		return attributeDescriptions;
 	}

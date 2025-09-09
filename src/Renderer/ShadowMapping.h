@@ -129,6 +129,9 @@ namespace AstralEngine {
         VkSampler getShadowSampler() const { return m_shadowSampler; }
         const Vulkan::VulkanBuffer& getShadowUBO() const { return *m_shadowUBO; }
         
+        // Descriptor set layout access for pipeline creation
+        VkDescriptorSetLayout getDescriptorSetLayout() const { return m_descriptorSetLayout; }
+        
         // Configuration
         void setConfig(const ShadowConfig& config);
         const ShadowConfig& getConfig() const { return m_config; }
@@ -141,6 +144,7 @@ namespace AstralEngine {
         void createShadowMap();
         void createShadowSampler();
         void createShadowUBO();
+        void createDescriptorSetLayout();
         void createRenderPass();
         void createFramebuffers();
         void createShadowPipeline();
@@ -179,8 +183,9 @@ namespace AstralEngine {
         VkPipelineLayout m_pipelineLayout = VK_NULL_HANDLE;
         VkPipeline m_pipeline = VK_NULL_HANDLE;
         
-        // Shadow UBO
+        // Shadow UBO and descriptor set resources
         std::unique_ptr<Vulkan::VulkanBuffer> m_shadowUBO;
+        VkDescriptorSetLayout m_descriptorSetLayout = VK_NULL_HANDLE;
         
         // Shadow map array (for multiple cascades)
         bool m_useArrayTexture = true;
