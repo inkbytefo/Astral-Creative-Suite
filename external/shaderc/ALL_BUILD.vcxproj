@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveNugetPackages>false</ResolveNugetPackages>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5878A33B-093D-37D9-A4BD-95D80976795A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\bin\cmake.exe -SC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc -BC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc --check-stamp-file C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckCXXCompilerFlag.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckCXXSourceCompiles.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPython.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPython\Support.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\GNUInstallDirs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CheckCompilerFlag.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CheckSourceCompiles.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Linker\MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeCCompiler.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeCXXCompiler.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeRCCompiler.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeSystem.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\cmake\setup_build.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\cmake\utils.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\bin\cmake.exe -SC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc -BC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc --check-stamp-file C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckCXXCompilerFlag.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckCXXSourceCompiles.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPython.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPython\Support.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\GNUInstallDirs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CheckCompilerFlag.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CheckSourceCompiles.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Linker\MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeCCompiler.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeCXXCompiler.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeRCCompiler.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeSystem.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\cmake\setup_build.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\cmake\utils.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\bin\cmake.exe -SC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc -BC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc --check-stamp-file C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckCXXCompilerFlag.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckCXXSourceCompiles.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPython.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPython\Support.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\GNUInstallDirs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CheckCompilerFlag.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CheckSourceCompiles.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Linker\MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeCCompiler.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeCXXCompiler.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeRCCompiler.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeSystem.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\cmake\setup_build.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\cmake\utils.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\bin\cmake.exe -SC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc -BC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc --check-stamp-file C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckCXXCompilerFlag.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckCXXSourceCompiles.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPython.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPython\Support.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\GNUInstallDirs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CheckCompilerFlag.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Internal\CheckSourceCompiles.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Linker\MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-MSVC-C.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeCCompiler.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeCXXCompiler.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeRCCompiler.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\4.1.0\CMakeSystem.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\cmake\setup_build.cmake;C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\cmake\utils.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\ZERO_CHECK.vcxproj">
+      <Project>{C3BFCBB2-7F5B-3DEB-BB49-6EAF7567A6C5}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\GenericCodeGen.vcxproj">
+      <Project>{F6E14D80-6404-33DE-AC00-90109925CD42}</Project>
+      <Name>GenericCodeGen</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\MachineIndependent.vcxproj">
+      <Project>{A93399EB-1F65-3060-AA3F-D4E87995AA2C}</Project>
+      <Name>MachineIndependent</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\OSDependent\Windows\OSDependent.vcxproj">
+      <Project>{A39BE718-59B0-314A-AC92-C7EDD9F5B3CA}</Project>
+      <Name>OSDependent</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\SPIRV\SPIRV.vcxproj">
+      <Project>{DC2EE78E-93F6-3B14-B812-FCFC04BE786C}</Project>
+      <Name>SPIRV</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\diff\SPIRV-Tools-diff.vcxproj">
+      <Project>{DA94BCB9-A84B-3EA5-9A0A-1928A1AD83EE}</Project>
+      <Name>SPIRV-Tools-diff</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\link\SPIRV-Tools-link.vcxproj">
+      <Project>{0485D385-B9B6-3E8E-B24E-FA163EDD33DC}</Project>
+      <Name>SPIRV-Tools-link</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\lint\SPIRV-Tools-lint.vcxproj">
+      <Project>{8DC22766-497E-3014-A5DB-5B064738E2F9}</Project>
+      <Name>SPIRV-Tools-lint</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.vcxproj">
+      <Project>{EA5B994A-49D6-3BDB-9395-58D252FD2A52}</Project>
+      <Name>SPIRV-Tools-opt</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\reduce\SPIRV-Tools-reduce.vcxproj">
+      <Project>{E9BDC4A4-9D33-3951-B9DE-61F04C26F4D8}</Project>
+      <Name>SPIRV-Tools-reduce</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-shared.vcxproj">
+      <Project>{1E895163-DF6D-330F-8B65-44025822C732}</Project>
+      <Name>SPIRV-Tools-shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.vcxproj">
+      <Project>{D17EDB04-3773-30E6-8DEF-42D74B28E0F7}</Project>
+      <Name>SPIRV-Tools-static</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\SPIRV\SPVRemapper.vcxproj">
+      <Project>{14646938-DD94-3521-B04D-B0FCD9CA0126}</Project>
+      <Name>SPVRemapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\check-copyright.vcxproj">
+      <Project>{7B99847B-70A3-3FF2-BE4D-8D44E1F42469}</Project>
+      <Name>check-copyright</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.vcxproj">
+      <Project>{D164E608-A755-37FF-BC80-3B69B4A35BC2}</Project>
+      <Name>glslang</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang-default-resource-limits.vcxproj">
+      <Project>{89B5A6C3-0D10-35AE-B63E-7FB7DD6F7E59}</Project>
+      <Name>glslang-default-resource-limits</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\StandAlone\glslang-standalone.vcxproj">
+      <Project>{CD8161D3-07D5-3BF7-B800-75006B7B4B4D}</Project>
+      <Name>glslang-standalone</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\glslc\glslc.vcxproj">
+      <Project>{EF1B4F14-BFBE-396D-A157-0F297E638B86}</Project>
+      <Name>glslc</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\shaderc.vcxproj">
+      <Project>{C39BB9EA-2046-3299-AEE1-A31B4BF0E2D9}</Project>
+      <Name>shaderc</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\shaderc-pkg-config.vcxproj">
+      <Project>{8E7DEA57-CA89-3E79-A036-5ABC31DF51C6}</Project>
+      <Name>shaderc-pkg-config</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\shaderc_combined.vcxproj">
+      <Project>{611D718F-DAF2-3F11-B332-52CCD0AB6B3A}</Project>
+      <Name>shaderc_combined</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\shaderc_combined-pkg-config.vcxproj">
+      <Project>{245DAD40-170D-3D1A-85CE-67A60981921A}</Project>
+      <Name>shaderc_combined-pkg-config</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\shaderc_shared.vcxproj">
+      <Project>{CA79E31B-BCE1-3AB9-8069-BA0D4CB7CC39}</Project>
+      <Name>shaderc_shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\shaderc_static-pkg-config.vcxproj">
+      <Project>{359F8E4D-90D4-325C-BB2C-6F82E3C5AB4D}</Project>
+      <Name>shaderc_static-pkg-config</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.vcxproj">
+      <Project>{6F1A31A7-B847-35B7-9172-3EB3058C4EE6}</Project>
+      <Name>shaderc_util</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\tools\spirv-as.vcxproj">
+      <Project>{24595620-218B-3AF2-9771-63B6F628D2F3}</Project>
+      <Name>spirv-as</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\tools\spirv-cfg.vcxproj">
+      <Project>{15668EDC-2E40-3FD8-B49B-F56610C47D23}</Project>
+      <Name>spirv-cfg</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\tools\spirv-diff.vcxproj">
+      <Project>{523959AB-A9C2-3713-9FFA-7A06D4F30EB7}</Project>
+      <Name>spirv-diff</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\tools\spirv-dis.vcxproj">
+      <Project>{CBB32F33-5319-3160-842A-EFE134B3F672}</Project>
+      <Name>spirv-dis</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\tools\spirv-link.vcxproj">
+      <Project>{45263162-010B-3971-A278-307CE7F9BCE3}</Project>
+      <Name>spirv-link</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\tools\spirv-lint.vcxproj">
+      <Project>{A2AB82E0-3086-3970-8814-C81118EB4CC4}</Project>
+      <Name>spirv-lint</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\tools\spirv-objdump.vcxproj">
+      <Project>{0199A4AC-C3C7-3BFC-A50D-C5D4103EE8E5}</Project>
+      <Name>spirv-objdump</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\tools\spirv-opt.vcxproj">
+      <Project>{40541B50-C52E-3D37-B568-5E9E6FBC3A8D}</Project>
+      <Name>spirv-opt</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\tools\spirv-reduce.vcxproj">
+      <Project>{6D17B73A-AD7F-34A2-B63F-35864A0746CF}</Project>
+      <Name>spirv-reduce</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\StandAlone\spirv-remap.vcxproj">
+      <Project>{841CC691-551B-370B-80F4-7535F4A4B5F9}</Project>
+      <Name>spirv-remap</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\examples\cpp-interface\spirv-tools-cpp-example.vcxproj">
+      <Project>{68E1BD2F-F0F9-31D8-91F0-22D6E594E125}</Project>
+      <Name>spirv-tools-cpp-example</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\spirv-tools-pkg-config.vcxproj">
+      <Project>{6D93E816-2ECE-380B-BBE3-C1877DEDA122}</Project>
+      <Name>spirv-tools-pkg-config</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\tools\spirv-val.vcxproj">
+      <Project>{7E81A5EB-2741-3934-90C8-2F67ECE74311}</Project>
+      <Name>spirv-val</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,27 +1,38 @@
 #pragma once
 
-#include "VulkanContext.h"
+#include "VulkanDevice.h"
+#include "Renderer/PipelineConfig.h"
+#include <vulkan/vulkan.h>
 #include <vector>
 
-namespace Astral::Vulkan {
-    class VulkanPipeline {
+// Forward declaration
+namespace AstralEngine { class Shader; }
+
+namespace AstralEngine::Vulkan {
+class VulkanPipeline {
     public:
-        VulkanPipeline(VulkanDevice& device, VkRenderPass renderPass, VkDescriptorSetLayout descriptorSetLayout, const std::string& vertFilepath, const std::string& fragFilepath);
+        // Constructor with default pipeline configuration
+        VulkanPipeline(VulkanDevice& device, const std::vector<VkDescriptorSetLayout>& setLayouts, VkFormat swapChainImageFormat, VkFormat depthFormat, const Shader& shader);
+        // Constructor with custom pipeline configuration
+        VulkanPipeline(VulkanDevice& device, const std::vector<VkDescriptorSetLayout>& setLayouts, VkFormat swapChainImageFormat, VkFormat depthFormat, const Shader& shader, const PipelineConfig& config);
         ~VulkanPipeline();
 
-        VulkanPipeline(const VulkanPipeline&) = delete;
-        VulkanPipeline& operator=(const VulkanPipeline&) = delete;
-
+        VkPipeline getPipeline() const { return m_graphicsPipeline; }
+        VkPipelineLayout getPipelineLayout() const { return m_pipelineLayout; }
+        VkPipelineCache getPipelineCache() const { return m_pipelineCache; }
+        
         void Bind(VkCommandBuffer commandBuffer);
-        VkPipelineLayout GetPipelineLayout() const { return m_pipelineLayout; }
 
-    private:
-        void createGraphicsPipeline(const std::string& vertFilepath, const std::string& fragFilepath, VkRenderPass renderPass, VkDescriptorSetLayout descriptorSetLayout);
-        static std::vector<char> readFile(const std::string& filepath);
-        VkShaderModule createShaderModule(const std::vector<char>& code);
+private:
+        void createGraphicsPipeline(const Shader& shader, const std::vector<VkDescriptorSetLayout>& setLayouts, VkFormat swapChainImageFormat, VkFormat depthFormat, const PipelineConfig& config);
+        void createPipelineCache();
+        void loadPipelineCache();
+        void savePipelineCache();
 
         VulkanDevice& m_device;
         VkPipeline m_graphicsPipeline;
         VkPipelineLayout m_pipelineLayout;
+        VkPipelineCache m_pipelineCache;
+        PipelineConfig m_config;
     };
 }

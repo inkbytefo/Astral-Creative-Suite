@@ -4,20 +4,22 @@
 #include <vulkan/vulkan.h>
 
 // 2. VMA'yı Vulkan'dan SONRA dahil et.
-#include "vk_mem_alloc.h"
+// Forward declaration for VmaAllocator
+struct VmaAllocator_T;
+typedef struct VmaAllocator_T* VmaAllocator;
 
 // Projenin diğer bileşenleri
 #include "Platform/Window.h"
 #include <memory>
 #include <glm/glm.hpp>
 
-namespace Astral::Vulkan {
+namespace AstralEngine::Vulkan {
     // İleride kullanılacak sınıflar için ön bildirimler
     class VulkanDevice;
     class VulkanSwapChain;
 
     struct UniformBufferObject {
-        alignas(16) glm::mat4 model;
+        // Model matrisini kaldırın çünkü artık push constant olarak gönderilecek
         alignas(16) glm::mat4 view;
         alignas(16) glm::mat4 proj;
     };
@@ -27,7 +29,6 @@ namespace Astral::Vulkan {
         VkInstance instance = VK_NULL_HANDLE;
         VkDebugUtilsMessengerEXT debugMessenger = VK_NULL_HANDLE;
         VkSurfaceKHR surface = VK_NULL_HANDLE;
-        VmaAllocator allocator = VK_NULL_HANDLE;
         
         std::unique_ptr<VulkanDevice> device;
         std::unique_ptr<VulkanSwapChain> swapChain;

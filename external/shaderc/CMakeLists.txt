@@ -117,13 +117,16 @@ add_custom_target(add-copyright
   COMMENT "Add copyright")
 
 if(MSVC)
-  option(SHADERC_ENABLE_SHARED_CRT
-          "Use the shared CRT instead of the static CRT"
-		  OFF)
-  if (SHADERC_ENABLE_SHARED_CRT)
-    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
-  else()
-    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+  # Use the parent project's MSVC runtime library setting if it's already set
+  if (NOT DEFINED CMAKE_MSVC_RUNTIME_LIBRARY)
+    option(SHADERC_ENABLE_SHARED_CRT
+            "Use the shared CRT instead of the static CRT"
+	    OFF)
+    if (SHADERC_ENABLE_SHARED_CRT)
+      set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+    else()
+      set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    endif()
   endif()
 endif(MSVC)
 

@@ -4,31 +4,38 @@
 #include <stdexcept>
 #include <set>
 
-namespace Astral::Vulkan {
+#include <vk_mem_alloc.h>
+
+namespace AstralEngine::Vulkan {
+
     VulkanDevice::VulkanDevice(VkInstance instance, VkSurfaceKHR surface) 
         : m_instance(instance), m_surface(surface) {
         pickPhysicalDevice();
         createLogicalDevice();
-
-        // Kopyalama işlemleri için command pool oluştur
-        VkCommandPoolCreateInfo poolInfo{};
-        poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-        poolInfo.queueFamilyIndex = m_indices.graphicsFamily;
-        poolInfo.flags = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT; // Kısa ömürlü buffer'lar için
-        if (vkCreateCommandPool(m_device, &poolInfo, nullptr, &m_commandPool) != VK_SUCCESS) {
-            throw std::runtime_error("Cihaz için command pool oluşturulamadı!");
-        }
+        createCommandPool();
+        
+        // Create VMA allocator
+        VmaAllocatorCreateInfo allocatorInfo = {};
+        allocatorInfo.vulkanApiVersion = VK_MAKE_VERSION(1, 4, 0);
+        allocatorInfo.physicalDevice = m_physicalDevice;
+        allocatorInfo.device = m_device;
+        allocatorInfo.instance = m_instance;
+        vmaCreateAllocator(&allocatorInfo, &m_allocator);
     }
 
     VulkanDevice::~VulkanDevice() {
+        if (m_allocator != VK_NULL_HANDLE) {
+            vmaDestroyAllocator(m_allocator);
+        }
+        
         vkDestroyCommandPool(m_device, m_commandPool, nullptr);
         if (m_device != VK_NULL_HANDLE) {
             vkDestroyDevice(m_device, nullptr);
-            ASTRAL_LOG_INFO("Vulkan mantıksal cihazı yok edildi.");
+            AE_INFO("Vulkan mantıksal cihazı yok edildi.");
         }
     }
 
-    void VulkanDevice::CopyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) {
+    VkCommandBuffer VulkanDevice::beginSingleTimeCommands() {
         VkCommandBufferAllocateInfo allocInfo{};
         allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
         allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
@@ -41,12 +48,12 @@ namespace Astral::Vulkan {
         VkCommandBufferBeginInfo beginInfo{};
         beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
         beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+
         vkBeginCommandBuffer(commandBuffer, &beginInfo);
+        return commandBuffer;
+    }
 
-        VkBufferCopy copyRegion{};
-        copyRegion.size = size;
-        vkCmdCopyBuffer(commandBuffer, srcBuffer, dstBuffer, 1, &copyRegion);
-
+    void VulkanDevice::endSingleTimeCommands(VkCommandBuffer commandBuffer) {
         vkEndCommandBuffer(commandBuffer);
 
         VkSubmitInfo submitInfo{};
@@ -55,9 +62,47 @@ namespace Astral::Vulkan {
         submitInfo.pCommandBuffers = &commandBuffer;
 
         vkQueueSubmit(m_graphicsQueue, 1, &submitInfo, VK_NULL_HANDLE);
-        vkQueueWaitIdle(m_graphicsQueue); // Kopyalama bitene kadar bekle
+        vkQueueWaitIdle(m_graphicsQueue);
 
         vkFreeCommandBuffers(m_device, m_commandPool, 1, &commandBuffer);
+    }
+
+    void VulkanDevice::copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) {
+        VkCommandBuffer commandBuffer = beginSingleTimeCommands();
+
+        VkBufferCopy copyRegion{};
+        copyRegion.size = size;
+        vkCmdCopyBuffer(commandBuffer, srcBuffer, dstBuffer, 1, &copyRegion);
+
+        endSingleTimeCommands(commandBuffer);
+    }
+
+    void VulkanDevice::copyBufferToImage(VkBuffer buffer, VkImage image, uint32_t width, uint32_t height) {
+        VkCommandBuffer commandBuffer = beginSingleTimeCommands();
+
+        VkBufferImageCopy region{};
+        region.bufferOffset = 0;
+        region.bufferRowLength = 0;
+        region.bufferImageHeight = 0;
+
+        region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        region.imageSubresource.mipLevel = 0;
+        region.imageSubresource.baseArrayLayer = 0;
+        region.imageSubresource.layerCount = 1;
+
+        region.imageOffset = {0, 0, 0};
+        region.imageExtent = {width, height, 1};
+
+        vkCmdCopyBufferToImage(
+            commandBuffer,
+            buffer,
+            image,
+            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+            1,
+            &region
+        );
+
+        endSingleTimeCommands(commandBuffer);
     }
 
     void VulkanDevice::pickPhysicalDevice() {
@@ -84,7 +129,7 @@ namespace Astral::Vulkan {
 
         VkPhysicalDeviceProperties properties;
         vkGetPhysicalDeviceProperties(m_physicalDevice, &properties);
-        ASTRAL_LOG_INFO("Fiziksel Cihaz Seçildi: %s", properties.deviceName);
+        AE_INFO("Fiziksel Cihaz Seçildi: %s", properties.deviceName);
     }
 
     void VulkanDevice::createLogicalDevice() {
@@ -105,8 +150,16 @@ namespace Astral::Vulkan {
 
         VkPhysicalDeviceFeatures deviceFeatures{};
         
+        // Enable features required for Dynamic Rendering
+        deviceFeatures.fillModeNonSolid = VK_TRUE; // For wireframe rendering if needed
+        
+        VkPhysicalDeviceVulkan13Features deviceVulkan13Features{};
+        deviceVulkan13Features.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_FEATURES;
+        deviceVulkan13Features.dynamicRendering = VK_TRUE;
+        
         VkDeviceCreateInfo createInfo{};
         createInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
+        createInfo.pNext = &deviceVulkan13Features;
         createInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
         createInfo.pQueueCreateInfos = queueCreateInfos.data();
         createInfo.pEnabledFeatures = &deviceFeatures;
@@ -126,7 +179,17 @@ namespace Astral::Vulkan {
 
         vkGetDeviceQueue(m_device, m_indices.graphicsFamily, 0, &m_graphicsQueue);
         vkGetDeviceQueue(m_device, m_indices.presentFamily, 0, &m_presentQueue);
-        ASTRAL_LOG_INFO("Vulkan mantıksal cihazı başarıyla oluşturuldu.");
+        AE_INFO("Vulkan mantıksal cihazı başarıyla oluşturuldu.");
+    }
+
+    void VulkanDevice::createCommandPool() {
+        VkCommandPoolCreateInfo poolInfo{};
+        poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+        poolInfo.queueFamilyIndex = m_indices.graphicsFamily;
+        poolInfo.flags = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT | VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+        if (vkCreateCommandPool(m_device, &poolInfo, nullptr, &m_commandPool) != VK_SUCCESS) {
+            throw std::runtime_error("Cihaz için command pool oluşturulamadı!");
+        }
     }
 
     bool VulkanDevice::isDeviceSuitable(VkPhysicalDevice device) {

@@ -1,0 +1,575 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{611D718F-DAF2-3F11-B332-52CCD0AB6B3A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>shaderc_combined</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">shaderc_combined.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">shaderc_combined</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">shaderc_combined.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">shaderc_combined</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">shaderc_combined.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">shaderc_combined</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">shaderc_combined.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">shaderc_combined</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/libshaderc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\bin\cmake.exe -SC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc -BC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc --check-stamp-file C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/libshaderc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckCSourceCompiles.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckIncludeFile.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckLibraryExists.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindThreads.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/libshaderc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\bin\cmake.exe -SC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc -BC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc --check-stamp-file C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/libshaderc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckCSourceCompiles.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckIncludeFile.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckLibraryExists.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindThreads.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/libshaderc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\bin\cmake.exe -SC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc -BC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc --check-stamp-file C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/libshaderc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckCSourceCompiles.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckIncludeFile.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckLibraryExists.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindThreads.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/libshaderc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\bin\cmake.exe -SC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc -BC:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc --check-stamp-file C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/libshaderc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckCSourceCompiles.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckIncludeFile.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\CheckLibraryExists.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\share\cmake-4.1\Modules\FindThreads.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\bit_vector.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\parse_number.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\string_utils.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\assembly_grammar.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\binary.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\diagnostic.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\disassemble.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\ext_inst.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\extensions.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\libspirv.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\name_mapper.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\opcode.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\operand.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\parsed_operand.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\print.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\software_version.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\spirv_endian.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\spirv_fuzzer_options.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\spirv_optimizer_options.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\spirv_reducer_options.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\spirv_target_env.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\spirv_validator_options.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\table.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\table2.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\text.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\text_handler.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\to_string.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_adjacency.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_annotation.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_arithmetics.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_atomics.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_barriers.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_bitwise.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_builtins.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_capability.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_cfg.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_composites.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_constants.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_conversion.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_debug.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_decorations.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_derivatives.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_extensions.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_execution_limitations.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_function.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_graph.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_id.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_image.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_interfaces.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_instruction.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_layout.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_literals.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_logicals.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_memory.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_memory_semantics.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_mesh_shading.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_misc.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_mode_setting.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_non_uniform.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_primitives.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_ray_query.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_ray_tracing.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_ray_tracing_reorder.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_scopes.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_small_type_uses.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_tensor_layout.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_tensor.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_type.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_invalid_type.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\basic_block.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\construct.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\function.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\instruction.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validation_state.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\pch_source.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\fix_func_call_arguments.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\aggressive_dead_code_elim_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\amd_ext_to_khr.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\analyze_live_input_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\basic_block.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\block_merge_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\block_merge_util.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\build_module.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\ccp_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\cfg_cleanup_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\cfg.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\code_sink.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\combine_access_chains.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\compact_ids_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\composite.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\const_folding_rules.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\constants.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\control_dependence.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\convert_to_sampled_image_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\convert_to_half_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\copy_prop_arrays.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\dataflow.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\dead_branch_elim_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\dead_insert_elim_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\dead_variable_elimination.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\decoration_manager.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\debug_info_manager.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\def_use_manager.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\desc_sroa.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\desc_sroa_util.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\dominator_analysis.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\dominator_tree.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\eliminate_dead_constant_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\eliminate_dead_functions_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\eliminate_dead_functions_util.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\eliminate_dead_io_components_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\eliminate_dead_members_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\eliminate_dead_output_stores_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\feature_manager.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\fix_storage_class.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\flatten_decoration_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\fold.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\folding_rules.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\fold_spec_constant_op_and_composite_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\freeze_spec_constant_value_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\function.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\graphics_robust_access_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\if_conversion.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\inline_exhaustive_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\inline_opaque_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\inline_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\instruction.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\instruction_list.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\interface_var_sroa.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\invocation_interlock_placement_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\interp_fixup_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\opextinst_forward_ref_fixup_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\ir_context.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\ir_loader.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\licm_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\liveness.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\local_access_chain_convert_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\local_redundancy_elimination.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\local_single_block_elim_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\local_single_store_elim_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_dependence.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_dependence_helpers.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_descriptor.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_fission.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_fusion.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_fusion_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_peeling.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_utils.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_unroller.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_unswitch_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\mem_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\merge_return_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\modify_maximal_reconvergence.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\module.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\optimizer.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\pass_manager.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\private_to_local_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\propagator.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\reduce_load_size.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\redundancy_elimination.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\register_pressure.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\relax_float_ops_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\canonicalize_ids_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\remove_dontinline_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\remove_duplicates_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\remove_unused_interface_variables_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\replace_desc_array_access_using_var_index.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\replace_invalid_opc.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\resolve_binding_conflicts_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\scalar_analysis.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\scalar_analysis_simplification.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\scalar_replacement_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\set_spec_constant_default_value_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\simplification_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\split_combined_image_sampler_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\spread_volatile_semantics.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\ssa_rewrite_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\strength_reduction_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\strip_debug_info_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\strip_nonsemantic_info_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\struct_cfg_analysis.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\struct_packing_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\switch_descriptorset_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\trim_capabilities_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\type_manager.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\types.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\unify_const_pass.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\upgrade_memory_model.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\value_number_table.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\vector_dce.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\workaround1209.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\wrap_opkill.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\pch_source_opt.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\SPIRV\SPIRV.dir\$(Configuration)\stub.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\cmake_pch.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\glslang_c_interface.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\CodeGen.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Link.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\ossource.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\glslang_tab.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\attribute.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Constant.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\iomapper.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\InfoSink.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Initialize.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\IntermTraverse.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Intermediate.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\ParseContextBase.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\ParseHelper.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\PoolAlloc.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\RemoveTree.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Scan.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\ShaderLang.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\SpirvIntrinsics.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\SymbolTable.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Versions.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\intermOut.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\limits.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\linkValidate.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\parseConst.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\reflection.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Pp.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\PpAtom.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\PpContext.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\PpScanner.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\PpTokens.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\propagateNoContraction.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\hlslAttributes.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\hlslParseHelper.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\hlslScanContext.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\hlslOpMap.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\hlslTokenStream.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\hlslGrammar.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\hlslParseables.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\GlslangToSpv.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\InReadableOrder.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Logger.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\SpvBuilder.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\SpvPostProcess.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\doc.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\SpvTools.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\disassemble.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\spirv_c_interface.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\args.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\compiler.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\file_finder.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\io_shaderc.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\message.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\resources.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\shader_stage.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\spirv_tools_wrapper.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\version_profile.obj" />
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\shaderc.dir\$(Configuration)\shaderc.obj" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\ZERO_CHECK.vcxproj">
+      <Project>{C3BFCBB2-7F5B-3DEB-BB49-6EAF7567A6C5}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\SPIRV\SPIRV.vcxproj">
+      <Project>{DC2EE78E-93F6-3B14-B812-FCFC04BE786C}</Project>
+      <Name>SPIRV</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.vcxproj">
+      <Project>{EA5B994A-49D6-3BDB-9395-58D252FD2A52}</Project>
+      <Name>SPIRV-Tools-opt</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.vcxproj">
+      <Project>{D17EDB04-3773-30E6-8DEF-42D74B28E0F7}</Project>
+      <Name>SPIRV-Tools-static</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.vcxproj">
+      <Project>{D164E608-A755-37FF-BC80-3B69B4A35BC2}</Project>
+      <Name>glslang</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\shaderc.vcxproj">
+      <Project>{C39BB9EA-2046-3299-AEE1-A31B4BF0E2D9}</Project>
+      <Name>shaderc</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.vcxproj">
+      <Project>{6F1A31A7-B847-35B7-9172-3EB3058C4EE6}</Project>
+      <Name>shaderc_util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

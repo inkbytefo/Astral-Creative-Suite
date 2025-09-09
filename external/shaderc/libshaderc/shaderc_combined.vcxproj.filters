@@ -1,0 +1,778 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\bit_vector.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\parse_number.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\string_utils.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\assembly_grammar.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\binary.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\diagnostic.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\disassemble.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\ext_inst.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\extensions.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\libspirv.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\name_mapper.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\opcode.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\operand.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\parsed_operand.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\print.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\software_version.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\spirv_endian.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\spirv_fuzzer_options.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\spirv_optimizer_options.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\spirv_reducer_options.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\spirv_target_env.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\spirv_validator_options.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\table.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\table2.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\text.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\text_handler.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\to_string.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_adjacency.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_annotation.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_arithmetics.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_atomics.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_barriers.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_bitwise.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_builtins.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_capability.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_cfg.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_composites.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_constants.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_conversion.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_debug.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_decorations.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_derivatives.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_extensions.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_execution_limitations.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_function.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_graph.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_id.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_image.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_interfaces.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_instruction.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_layout.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_literals.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_logicals.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_memory.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_memory_semantics.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_mesh_shading.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_misc.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_mode_setting.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_non_uniform.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_primitives.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_ray_query.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_ray_tracing.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_ray_tracing_reorder.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_scopes.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_small_type_uses.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_tensor_layout.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_tensor.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_type.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validate_invalid_type.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\basic_block.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\construct.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\function.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\instruction.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\validation_state.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\SPIRV-Tools-static.dir\$(Configuration)\pch_source.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\fix_func_call_arguments.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\aggressive_dead_code_elim_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\amd_ext_to_khr.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\analyze_live_input_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\basic_block.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\block_merge_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\block_merge_util.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\build_module.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\ccp_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\cfg_cleanup_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\cfg.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\code_sink.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\combine_access_chains.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\compact_ids_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\composite.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\const_folding_rules.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\constants.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\control_dependence.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\convert_to_sampled_image_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\convert_to_half_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\copy_prop_arrays.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\dataflow.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\dead_branch_elim_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\dead_insert_elim_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\dead_variable_elimination.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\decoration_manager.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\debug_info_manager.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\def_use_manager.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\desc_sroa.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\desc_sroa_util.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\dominator_analysis.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\dominator_tree.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\eliminate_dead_constant_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\eliminate_dead_functions_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\eliminate_dead_functions_util.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\eliminate_dead_io_components_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\eliminate_dead_members_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\eliminate_dead_output_stores_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\feature_manager.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\fix_storage_class.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\flatten_decoration_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\fold.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\folding_rules.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\fold_spec_constant_op_and_composite_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\freeze_spec_constant_value_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\function.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\graphics_robust_access_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\if_conversion.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\inline_exhaustive_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\inline_opaque_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\inline_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\instruction.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\instruction_list.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\interface_var_sroa.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\invocation_interlock_placement_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\interp_fixup_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\opextinst_forward_ref_fixup_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\ir_context.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\ir_loader.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\licm_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\liveness.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\local_access_chain_convert_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\local_redundancy_elimination.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\local_single_block_elim_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\local_single_store_elim_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_dependence.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_dependence_helpers.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_descriptor.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_fission.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_fusion.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_fusion_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_peeling.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_utils.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_unroller.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\loop_unswitch_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\mem_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\merge_return_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\modify_maximal_reconvergence.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\module.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\optimizer.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\pass_manager.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\private_to_local_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\propagator.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\reduce_load_size.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\redundancy_elimination.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\register_pressure.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\relax_float_ops_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\canonicalize_ids_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\remove_dontinline_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\remove_duplicates_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\remove_unused_interface_variables_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\replace_desc_array_access_using_var_index.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\replace_invalid_opc.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\resolve_binding_conflicts_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\scalar_analysis.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\scalar_analysis_simplification.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\scalar_replacement_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\set_spec_constant_default_value_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\simplification_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\split_combined_image_sampler_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\spread_volatile_semantics.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\ssa_rewrite_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\strength_reduction_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\strip_debug_info_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\strip_nonsemantic_info_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\struct_cfg_analysis.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\struct_packing_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\switch_descriptorset_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\trim_capabilities_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\type_manager.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\types.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\unify_const_pass.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\upgrade_memory_model.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\value_number_table.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\vector_dce.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\workaround1209.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\wrap_opkill.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\spirv-tools\source\opt\SPIRV-Tools-opt.dir\$(Configuration)\pch_source_opt.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\SPIRV\SPIRV.dir\$(Configuration)\stub.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\cmake_pch.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\glslang_c_interface.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\CodeGen.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Link.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\ossource.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\glslang_tab.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\attribute.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Constant.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\iomapper.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\InfoSink.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Initialize.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\IntermTraverse.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Intermediate.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\ParseContextBase.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\ParseHelper.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\PoolAlloc.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\RemoveTree.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Scan.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\ShaderLang.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\SpirvIntrinsics.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\SymbolTable.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Versions.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\intermOut.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\limits.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\linkValidate.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\parseConst.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\reflection.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Pp.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\PpAtom.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\PpContext.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\PpScanner.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\PpTokens.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\propagateNoContraction.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\hlslAttributes.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\hlslParseHelper.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\hlslScanContext.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\hlslOpMap.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\hlslTokenStream.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\hlslGrammar.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\hlslParseables.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\GlslangToSpv.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\InReadableOrder.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\Logger.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\SpvBuilder.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\SpvPostProcess.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\doc.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\SpvTools.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\disassemble.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\third_party\glslang\glslang\glslang.dir\$(Configuration)\spirv_c_interface.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\args.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\compiler.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\file_finder.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\io_shaderc.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\message.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\resources.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\shader_stage.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\spirv_tools_wrapper.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc_util\shaderc_util.dir\$(Configuration)\version_profile.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine\external\shaderc\libshaderc\shaderc.dir\$(Configuration)\shaderc.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Object Libraries">
+      <UniqueIdentifier>{CE2997BA-99D8-3BCC-8EF9-8F7B57483991}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

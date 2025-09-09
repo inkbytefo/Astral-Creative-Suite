@@ -1,25 +1,29 @@
 #pragma once
 
-#include "VulkanContext.h"
+#include "VulkanDevice.h"
+#include "Platform/Window.h"
 #include <vector>
 
 namespace Astral {
     class Window; // Forward declaration
 }
 
-namespace Astral::Vulkan {
+namespace AstralEngine::Vulkan {
     class VulkanSwapChain {
     public:
-        VulkanSwapChain(VulkanDevice& device, Window& window);
+        VulkanSwapChain(Vulkan::VulkanDevice& device, Window& window);
         ~VulkanSwapChain();
 
         VulkanSwapChain(const VulkanSwapChain&) = delete;
         VulkanSwapChain& operator=(const VulkanSwapChain&) = delete;
 
-        VkRenderPass GetRenderPass() const { return m_renderPass; }
-        VkFramebuffer GetFrameBuffer(int index) const { return m_swapChainFramebuffers[index]; }
-        VkExtent2D GetSwapChainExtent() const { return m_swapChainExtent; }
-        size_t GetImageCount() const { return m_swapChainImages.size(); }
+        // Removed getRenderPass() as it's no longer needed with Dynamic Rendering
+        // Removed getFrameBuffer() as it's no longer needed with Dynamic Rendering
+        VkExtent2D getSwapChainExtent() const { return m_swapChainExtent; }
+        size_t getImageCount() const { return m_swapChainImages.size(); }
+        VkFormat getSwapChainImageFormat() const { return m_swapChainImageFormat; }
+        const std::vector<VkImageView>& getImageViews() const { return m_swapChainImageViews; }
+        const std::vector<VkImage>& getImages() const { return m_swapChainImages; }
 
         VkResult AcquireNextImage(uint32_t* imageIndex);
         VkResult SubmitCommandBuffers(const VkCommandBuffer* buffers, uint32_t* imageIndex);
@@ -27,8 +31,8 @@ namespace Astral::Vulkan {
     private:
         void createSwapChain();
         void createImageViews();
-        void createRenderPass();
-        void createFramebuffers();
+        // Removed createRenderPass() as it's no longer needed with Dynamic Rendering
+        // Removed createFramebuffers() as it's no longer needed with Dynamic Rendering
         void createSyncObjects();
 
         // Helper fonksiyonlar
@@ -36,7 +40,7 @@ namespace Astral::Vulkan {
         VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
         VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
-        VulkanDevice& m_device;
+        Vulkan::VulkanDevice& m_device;
         Window& m_window;
 
         VkSwapchainKHR m_swapChain;
@@ -44,9 +48,8 @@ namespace Astral::Vulkan {
         VkFormat m_swapChainImageFormat;
         VkExtent2D m_swapChainExtent;
         std::vector<VkImageView> m_swapChainImageViews;
-        std::vector<VkFramebuffer> m_swapChainFramebuffers;
-
-        VkRenderPass m_renderPass;
+        // Removed m_swapChainFramebuffers as it's no longer needed with Dynamic Rendering
+        // Removed m_renderPass as it's no longer needed with Dynamic Rendering
 
         // Senkronizasyon
         std::vector<VkSemaphore> m_imageAvailableSemaphores;

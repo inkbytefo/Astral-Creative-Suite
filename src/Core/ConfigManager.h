@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace Astral {
+namespace AstralEngine {
     class ConfigManager {
     public:
         ConfigManager();
