@@ -55,12 +55,8 @@ target_include_directories(AstralEngine PUBLIC
 # --- Çalıştırılabilir Dosyayı Tanımla ---
 add_executable(AstralEditor src/main.cpp)
 
-# --- Test Programı ---
-add_executable(TestMaterial src/TestMaterial.cpp)
-
 # --- Çalıştırılabilir Dosyanın Bağımlılıklarını Belirt ---
 target_link_libraries(AstralEditor PRIVATE AstralEngine)
-target_link_libraries(TestMaterial PRIVATE AstralEngine)
 
 # --- Platforma Bağımlı Derleme Sonrası Adımlar ---
 if(WIN32)

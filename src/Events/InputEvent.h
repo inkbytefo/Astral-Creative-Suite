@@ -263,7 +263,7 @@ namespace AstralEngine {
             Y = 121, Z = 122,
 
             LeftBracket = 91,  // [
-            Backslash = 92,    // \\
+            Backslash = 92,    // backslash
             RightBracket = 93, // ]
             GraveAccent = 96,  // `
 

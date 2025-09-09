@@ -13,6 +13,9 @@ add_library(AstralEngine STATIC
     # Platform abstraction
     Platform/Window.cpp
     
+    # Event system
+    Events/EventManager.cpp
+    
     # Renderer modules
     Renderer/Renderer.cpp
     Renderer/VMA_Implementation.cpp
@@ -41,6 +44,9 @@ add_library(AstralEngine STATIC
     # Advanced rendering
     Renderer/ShadowMapping.cpp
     Renderer/MaterialShaderManager.cpp
+    
+    # Test utilities
+    MinimalRenderer.cpp
     
     # Legacy Entity system removed - use ArchetypeECS instead
 )
