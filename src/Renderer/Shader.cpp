@@ -29,9 +29,9 @@ namespace AstralEngine {
 
 	Shader::Shader(Vulkan::VulkanDevice& device, const std::string& vertFilepath, const std::string& fragFilepath)
 		: m_device(device), m_hasFragmentShader(true) {
-		// Path'leri çözümle ve SPIR-V yükle
-		auto vertPath = toSpvPath(resolveShaderPath(vertFilepath));
-		auto fragPath = toSpvPath(resolveShaderPath(fragFilepath));
+	// Path'leri çözümle ve SPIR-V yükle
+	auto vertPath = resolveShaderPath(toSpvPath(vertFilepath));
+	auto fragPath = resolveShaderPath(toSpvPath(fragFilepath));
 
 		auto vertShaderCode = readFile(vertPath);
 		auto fragShaderCode = readFile(fragPath);
@@ -41,8 +41,8 @@ namespace AstralEngine {
 	
 	Shader::Shader(Vulkan::VulkanDevice& device, const std::string& vertFilepath)
 		: m_device(device), m_hasFragmentShader(false) {
-		// Depth-only shader - path'i çözümle ve vertex shader'i yükle
-		auto vertPath = toSpvPath(resolveShaderPath(vertFilepath));
+	// Depth-only shader - path'i çözümle ve vertex shader'i yükle
+	auto vertPath = resolveShaderPath(toSpvPath(vertFilepath));
 		auto vertShaderCode = readFile(vertPath);
 		m_vertShaderModule = createShaderModule(vertShaderCode);
 		m_fragShaderModule = VK_NULL_HANDLE;

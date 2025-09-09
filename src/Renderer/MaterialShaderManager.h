@@ -120,9 +120,8 @@ namespace AstralEngine {
         std::unordered_map<std::string, std::shared_ptr<Shader>> m_shaderCache;
 
         // Shader paths
-        std::string m_vertexShaderPath = "Debug/shaders/unified_pbr.vert";
-        std::string m_fragmentShaderPath = "Debug/shaders/unified_pbr.frag";
-
+        std::string m_vertexShaderPath = "unified_pbr.vert";
+        std::string m_fragmentShaderPath = "unified_pbr.frag";
         // Hot reload support
         bool m_hotReloadEnabled = false;
 
