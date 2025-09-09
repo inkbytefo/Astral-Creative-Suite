@@ -6,6 +6,7 @@
 #include "Core/MemoryManager.h"
 #include "Platform/Window.h"
 #include "Renderer/Renderer.h"
+#include "Events/Events.h"
 #include "Renderer/Model.h"
 #include "Renderer/UnifiedMaterial.h"
 #include "ECS/ECS.h"
@@ -40,6 +41,9 @@ int main(int argc, char* argv[]) {
         auto& config = AstralEngine::EngineConfig::getInstance();
         config.applyRuntimeLimits();
         
+        // Event system'ini başlat
+        AstralEngine::InitializeEventSystem();
+        
         // Performance monitoring'i başlat
         if (config.enablePerformanceMonitoring) {
             AstralEngine::PerformanceMonitor::setSlowOperationThreshold(config.slowOperationThresholdMs);
@@ -60,12 +64,55 @@ int main(int argc, char* argv[]) {
         // Window ve Renderer initialization
         try {
             AE_DEBUG("Pencere oluşturuluyor...");
-            AstralEngine::Window window("Astral Engine v1.0", 800, 600);
+            
+            // Create window with modern configuration approach
+            AstralEngine::WindowConfig windowConfig = AstralEngine::WindowConfig::fromEngineConfig();
+            windowConfig.title = "Astral Engine v1.0";
+            windowConfig.width = 800;
+            windowConfig.height = 600;
+            
+            AstralEngine::Window window(windowConfig);
             AE_INFO("Pencere başarıyla oluşturuldu");
             
             AE_DEBUG("Renderer oluşturuluyor...");
             AstralEngine::Renderer renderer(window);
             AE_INFO("Renderer başarıyla oluşturuldu");
+            
+            // Set up event handling with the new event system
+            window.setEventCallback([&renderer](AstralEngine::Event& event) {
+                AstralEngine::EventDispatcher dispatcher(event);
+                
+                // Handle window resize events
+                dispatcher.dispatch<AstralEngine::WindowResizeEvent>([&renderer](AstralEngine::WindowResizeEvent& e) {
+                    AE_DEBUG("Window resized to {}x{}", e.getWidth(), e.getHeight());
+                    renderer.onFramebufferResize();
+                    return false; // Allow other handlers to process this event
+                });
+                
+                // Handle window close events
+                dispatcher.dispatch<AstralEngine::WindowCloseEvent>([](AstralEngine::WindowCloseEvent& e) {
+                    AE_DEBUG("Window close requested by event system");
+                    return false; // Allow window to close normally
+                });
+                
+                // Handle window focus events
+                dispatcher.dispatch<AstralEngine::WindowFocusEvent>([](AstralEngine::WindowFocusEvent& e) {
+                    AE_DEBUG("Window focus changed: {}", e.isFocused() ? "gained" : "lost");
+                    return false;
+                });
+                
+                // Handle window lost focus events
+                dispatcher.dispatch<AstralEngine::WindowLostFocusEvent>([](AstralEngine::WindowLostFocusEvent& e) {
+                    AE_DEBUG("Window lost focus");
+                    return false;
+                });
+                
+                // Handle window moved events
+                dispatcher.dispatch<AstralEngine::WindowMovedEvent>([](AstralEngine::WindowMovedEvent& e) {
+                    AE_DEBUG("Window moved to ({}, {})", e.getX(), e.getY());
+                    return false;
+                });
+            });
             
             // Create a scene
             AE_DEBUG("Sahne oluşturuluyor...");
@@ -140,7 +187,7 @@ int main(int argc, char* argv[]) {
             auto startTime = std::chrono::high_resolution_clock::now();
             auto lastPerfStatsTime = startTime;
             
-            while (!window.ShouldClose()) {
+            while (!window.shouldClose()) {
                 PERF_TIMER("MainLoop");
                 auto frameStart = std::chrono::high_resolution_clock::now();
                 
@@ -173,7 +220,7 @@ int main(int argc, char* argv[]) {
                 
                 {
                     PERF_TIMER("PollEvents");
-                    window.PollEvents();
+                    window.pollEvents();
                 }
                 
                 // Entity'yi her frame döndürelim
@@ -249,6 +296,10 @@ int main(int argc, char* argv[]) {
             if (config.enablePerformanceMonitoring) {
                 AstralEngine::PerformanceMonitor::reset();
             }
+            
+            // Event system cleanup
+            AE_DEBUG("Event system kapatılıyor...");
+            AstralEngine::ShutdownEventSystem();
             
             // Memory Manager cleanup
             AE_DEBUG("Memory Manager kapatılıyor...");

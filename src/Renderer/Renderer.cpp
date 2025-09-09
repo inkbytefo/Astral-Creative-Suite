@@ -70,7 +70,7 @@ namespace AstralEngine {
         m_defaultWhiteImageView = VK_NULL_HANDLE;
         m_defaultWhiteTextureSampler = VK_NULL_HANDLE;
 
-        m_window.SetRenderer(this);
+        // Event-driven window system - no direct renderer coupling needed
         
         try {
             initVulkan();
@@ -881,7 +881,7 @@ namespace AstralEngine {
     }
 
     void Renderer::createSurface() {
-        if (!SDL_Vulkan_CreateSurface(m_window.GetNativeWindow(), m_context->instance, nullptr, &m_context->surface)) {
+        if (!SDL_Vulkan_CreateSurface(m_window.getNativeWindow(), m_context->instance, nullptr, &m_context->surface)) {
             throw std::runtime_error("Vulkan yüzeyi (surface) oluşturulamadı!");
         }
         AE_INFO("Vulkan yüzeyi başarıyla oluşturuldu.");

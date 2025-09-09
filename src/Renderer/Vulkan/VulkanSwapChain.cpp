@@ -258,7 +258,7 @@ namespace AstralEngine::Vulkan {
             return capabilities.currentExtent;
         } else {
             int width, height;
-            SDL_GetWindowSizeInPixels(m_window.GetNativeWindow(), &width, &height);
+            SDL_GetWindowSizeInPixels(m_window.getNativeWindow(), &width, &height);
 
             VkExtent2D actualExtent = {
                 static_cast<uint32_t>(width),
