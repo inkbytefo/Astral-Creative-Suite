@@ -1,8 +1,0 @@
-# CMake generation dependency list for this directory.
-C:/Users/tpoyr/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/share/cmake-4.1/Modules/CheckCSourceCompiles.cmake
-C:/Users/tpoyr/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/share/cmake-4.1/Modules/CheckIncludeFile.cmake
-C:/Users/tpoyr/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/share/cmake-4.1/Modules/CheckLibraryExists.cmake
-C:/Users/tpoyr/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/share/cmake-4.1/Modules/FindPackageHandleStandardArgs.cmake
-C:/Users/tpoyr/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/share/cmake-4.1/Modules/FindPackageMessage.cmake
-C:/Users/tpoyr/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/share/cmake-4.1/Modules/FindThreads.cmake
-C:/Users/tpoyr/OneDrive/Desktop/AstralEngine/external/shaderc/glslc/CMakeLists.txt

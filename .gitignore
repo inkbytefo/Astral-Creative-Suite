@@ -23,6 +23,7 @@
 
 # Other
 /vendor/
+/external/
 
 # Shader compilation outputs
 /shaders_spv/
