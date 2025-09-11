@@ -18,7 +18,7 @@ namespace AstralEngine {
 
     MaterialShaderManager::MaterialShaderManager(Vulkan::VulkanDevice& device)
         : m_device(device) {
-        precompileCommonVariants();
+        // No runtime precompilation - shaders loaded on-demand from offline SPIR-V
     }
 
     std::shared_ptr<Shader> MaterialShaderManager::getShader(const UnifiedMaterialInstance& material) {
@@ -32,8 +32,8 @@ namespace AstralEngine {
             return it->second;
         }
 
-        // Compile new shader variant
-        auto shader = compileShader(variant);
+        // Load shader variant from offline SPIR-V
+        auto shader = createShaderFromVariant(variant);
         if (shader) {
             m_shaderCache[variant] = shader;
         }
@@ -41,91 +41,14 @@ namespace AstralEngine {
         return shader;
     }
 
-    void MaterialShaderManager::precompileCommonVariants() {
-        PERF_TIMER("MaterialShaderManager::precompileCommonVariants");
-        STACK_SCOPE(); // Use stack allocator for shader compilation
-        
-        // Common shader variants that are likely to be used
-        std::vector<std::string> commonVariants = {
-            // Basic variants
-            "",
-            "HAS_BASE_COLOR_TEXTURE",
-            "HAS_METALLIC_ROUGHNESS_TEXTURE",
-            "HAS_NORMAL_TEXTURE",
-            
-            // Combined variants
-            "HAS_BASE_COLOR_TEXTURE HAS_METALLIC_ROUGHNESS_TEXTURE",
-            "HAS_BASE_COLOR_TEXTURE HAS_NORMAL_TEXTURE",
-            "HAS_BASE_COLOR_TEXTURE HAS_METALLIC_ROUGHNESS_TEXTURE HAS_NORMAL_TEXTURE",
-            "HAS_BASE_COLOR_TEXTURE HAS_METALLIC_ROUGHNESS_TEXTURE HAS_NORMAL_TEXTURE HAS_OCCLUSION_TEXTURE",
-            
-            // Transparency variants
-            "ALPHA_TEST",
-            "ALPHA_BLEND",
-            "HAS_BASE_COLOR_TEXTURE ALPHA_TEST",
-            "HAS_BASE_COLOR_TEXTURE ALPHA_BLEND",
-            
-            // Unlit variant
-            "IS_UNLIT",
-            "IS_UNLIT HAS_BASE_COLOR_TEXTURE",
-            
-            // Advanced PBR features
-            "USE_CLEARCOAT",
-            "USE_TRANSMISSION",
-            "USE_SHEEN",
-            "USE_ANISOTROPY"
-        };
+    // Precompilation removed - offline build provides SPIR-V directly
 
-        std::cout << "Precompiling " << commonVariants.size() << " common shader variants..." << std::endl;
-        
-        for (const auto& variant : commonVariants) {
-            try {
-                getShader(variant);
-            } catch (const std::exception& e) {
-                std::cerr << "Failed to precompile shader variant '" << variant 
-                         << "': " << e.what() << std::endl;
-            }
-        }
-
-        std::cout << "Successfully compiled " << m_shaderCache.size() 
-                 << " shader variants." << std::endl;
-    }
-
-    void MaterialShaderManager::reloadShaders() {
-        if (!m_hotReloadEnabled) {
-            return;
-        }
-
-        std::cout << "Reloading all shader variants..." << std::endl;
-        
-        // Save current variants
-        std::vector<std::string> variants;
-        for (const auto& [variant, shader] : m_shaderCache) {
-            variants.push_back(variant);
-        }
-
-        // Clear cache
-        m_shaderCache.clear();
-
-        // Recompile all variants
-        for (const auto& variant : variants) {
-            try {
-                compileShader(variant);
-            } catch (const std::exception& e) {
-                std::cerr << "Failed to reload shader variant '" << variant 
-                         << "': " << e.what() << std::endl;
-            }
-        }
-
-        std::cout << "Reloaded " << m_shaderCache.size() << " shader variants." << std::endl;
-    }
+    // Hot-reload removed - offline build only
 
     void MaterialShaderManager::printStatistics() const {
         std::cout << "=== MaterialShaderManager Statistics ===" << std::endl;
-        std::cout << "Compiled variants: " << m_shaderCache.size() << std::endl;
-        std::cout << "Hot reload enabled: " << (m_hotReloadEnabled ? "Yes" : "No") << std::endl;
-        std::cout << "Vertex shader path: " << m_vertexShaderPath << std::endl;
-        std::cout << "Fragment shader path: " << m_fragmentShaderPath << std::endl;
+        std::cout << "Loaded SPIR-V variants: " << m_shaderCache.size() << std::endl;
+        std::cout << "Mode: Offline build (no runtime compilation)" << std::endl;
         
         if (!m_shaderCache.empty()) {
             std::cout << "Cached variants:" << std::endl;
@@ -219,36 +142,33 @@ namespace AstralEngine {
         return defines.str();
     }
 
-    std::shared_ptr<Shader> MaterialShaderManager::compileShader(const std::string& variant) {
-        PERF_TIMER("MaterialShaderManager::compileShader");
-        STACK_SCOPE(); // Use stack allocator for shader compilation
-        
+    std::shared_ptr<Shader> MaterialShaderManager::createShaderFromVariant(const std::string& variant) {
         try {
-            // Debug: print working directory and paths
-            std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
-            std::cout << "Vertex shader path: " << m_vertexShaderPath << std::endl;
-            std::cout << "Fragment shader path: " << m_fragmentShaderPath << std::endl;
+            // Determine which fragment shader base to use based on variant
+            std::string fragmentShaderBase = pickFragmentShaderBaseFromVariant(variant);
             
-            // Check if files exist
-            std::cout << "Vertex shader exists: " << std::filesystem::exists(m_vertexShaderPath + ".spv") << std::endl;
-            std::cout << "Fragment shader exists: " << std::filesystem::exists(m_fragmentShaderPath + ".spv") << std::endl;
+            // Always use unified_pbr.vert for vertex shader
+            auto shader = std::make_shared<Shader>(m_device, "unified_pbr.vert", fragmentShaderBase);
             
-            // Create shader with variant defines
-            auto shader = std::make_shared<Shader>(m_device, m_vertexShaderPath, m_fragmentShaderPath);
-            
-            // Apply variant defines if needed
-            if (!variant.empty()) {
-                // For now, we assume the shader compilation system handles defines
-                // In a real implementation, you would pass the defines to the shader compiler
-                std::cout << "Compiling shader variant: " << variant << std::endl;
-            }
-            
+            std::cout << "Loaded shader variant '" << variant << "' using " << fragmentShaderBase << std::endl;
             return shader;
             
         } catch (const std::exception& e) {
-            std::cerr << "Failed to compile shader variant '" << variant 
+            std::cerr << "Failed to load shader variant '" << variant 
                      << "': " << e.what() << std::endl;
             throw;
+        }
+    }
+    
+    std::string MaterialShaderManager::pickFragmentShaderBaseFromVariant(const std::string& variant) const {
+        // Priority: IS_UNLIT > HAS_BASECOLOR_MAP > default
+        // Note: generateShaderDefines creates "UNLIT" for IS_UNLIT and "HAS_BASECOLOR_MAP" for BaseColor texture
+        if (variant.find("UNLIT") != std::string::npos) {
+            return "unified_pbr_IS_UNLIT.frag";
+        } else if (variant.find("HAS_BASECOLOR_MAP") != std::string::npos) {
+            return "unified_pbr_HAS_BASECOLOR_MAP.frag";
+        } else {
+            return "unified_pbr.frag";
         }
     }
 

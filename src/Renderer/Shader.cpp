@@ -62,7 +62,7 @@ namespace AstralEngine {
 
 		if (!file.is_open()) {
 			// Use AssetLocator for detailed error reporting
-			AE_ERROR("Failed to open shader file: %s", filepath.c_str());
+            AE_ERROR("Failed to open shader file: {}", filepath);
 			AssetLocator::getInstance().logSearchPaths();
 			
 			std::string errorMsg = "Failed to open shader file: " + filepath;

@@ -20,6 +20,7 @@ namespace AstralEngine::ECS {
         // Entity naming
         void setEntityName(EntityID entity, const std::string& name);
         const std::string& getEntityName(EntityID entity) const;
+        EntityID findEntityByName(const std::string& name) const;
 
         // Component management (forwarded to archetype registry)
         template<typename T, typename... Args>

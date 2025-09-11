@@ -38,6 +38,16 @@ namespace AstralEngine::ECS {
         return m_registry.getEntityName(entity);
     }
 
+    EntityID Scene::findEntityByName(const std::string& name) const {
+        // This is a simple linear search - could be optimized with a map if needed
+        for (EntityID entity = 0; entity < static_cast<EntityID>(getEntityCount() + 10); ++entity) {
+            if (isEntityValid(entity) && getEntityName(entity) == name) {
+                return entity;
+            }
+        }
+        return INVALID_ENTITY;
+    }
+
     void Scene::update(float deltaTime) {
         // Update systems directly
         m_transformSystem.update(m_registry, deltaTime);

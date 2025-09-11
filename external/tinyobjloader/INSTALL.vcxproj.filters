@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\tpoyr\OneDrive\Desktop\AstralEngine_OLD\CMakeFiles\e2026541fe0f0aa0f74cd62bd91fa957\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{0989B63A-0F31-3A62-9615-2BE83FB0311E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

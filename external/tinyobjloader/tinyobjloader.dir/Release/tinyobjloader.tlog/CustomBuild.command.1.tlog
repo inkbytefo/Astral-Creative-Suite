@@ -1,0 +1,10 @@
+^C:\USERS\TPOYR\ONEDRIVE\DESKTOP\ASTRALENGINE_OLD\EXTERNAL\TINYOBJLOADER\CMAKELISTS.TXT
+setlocal
+C:\Users\tpoyr\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\bin\cmake.exe -SC:/Users/tpoyr/OneDrive/Desktop/AstralEngine_OLD -BC:/Users/tpoyr/OneDrive/Desktop/AstralEngine_OLD --check-stamp-file C:/Users/tpoyr/OneDrive/Desktop/AstralEngine_OLD/external/tinyobjloader/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

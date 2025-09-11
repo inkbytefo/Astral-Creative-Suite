@@ -1,5 +1,5 @@
 @echo off
-echo Compiling Astral Engine Shaders...
+echo Compiling Astral Creative Suite 2D Shaders...
 
 set GLSLC_PATH=%VULKAN_SDK%\Bin\glslc.exe
 
@@ -14,18 +14,17 @@ if not exist "%GLSLC_PATH%" (
 if not exist "build\Debug\shaders" mkdir build\Debug\shaders
 if not exist "build\Release\shaders" mkdir build\Release\shaders
 
-:: Compile vertex shaders
-echo Compiling vertex shaders...
-"%GLSLC_PATH%" -fshader-stage=vertex shaders/basic.vert -o build/Debug/shaders/basic.vert.spv
-"%GLSLC_PATH%" -fshader-stage=vertex shaders/pbr.vert -o build/Debug/shaders/pbr.vert.spv
-"%GLSLC_PATH%" -fshader-stage=vertex shaders/shadow_depth.vert -o build/Debug/shaders/shadow_depth.vert.spv
-"%GLSLC_PATH%" -fshader-stage=vertex shaders/triangle.vert -o build/Debug/shaders/triangle.vert.spv
-"%GLSLC_PATH%" -fshader-stage=vertex shaders/unified_pbr.vert -o build/Debug/shaders/unified_pbr.vert.spv
+:: Compile 2D vertex shaders
+echo Compiling 2D vertex shaders...
+"%GLSLC_PATH%" -fshader-stage=vertex shaders/2d_canvas.vert -o build/Debug/shaders/2d_canvas.vert.spv
+"%GLSLC_PATH%" -fshader-stage=vertex shaders/2d_brush.vert -o build/Debug/shaders/2d_brush.vert.spv
+"%GLSLC_PATH%" -fshader-stage=vertex shaders/2d_grid.vert -o build/Debug/shaders/2d_grid.vert.spv
 
-:: Compile fragment shaders
-echo Compiling fragment shaders...
-"%GLSLC_PATH%" -fshader-stage=fragment shaders/shadow_null.frag -o build/Debug/shaders/shadow_null.frag.spv
-"%GLSLC_PATH%" -fshader-stage=fragment shaders/unified_pbr.frag -o build/Debug/shaders/unified_pbr.frag.spv
+:: Compile 2D fragment shaders
+echo Compiling 2D fragment shaders...
+"%GLSLC_PATH%" -fshader-stage=fragment shaders/2d_canvas.frag -o build/Debug/shaders/2d_canvas.frag.spv
+"%GLSLC_PATH%" -fshader-stage=fragment shaders/2d_brush.frag -o build/Debug/shaders/2d_brush.frag.spv
+"%GLSLC_PATH%" -fshader-stage=fragment shaders/2d_grid.frag -o build/Debug/shaders/2d_grid.frag.spv
 
 :: Copy to Release directory
 echo Copying to Release directory...

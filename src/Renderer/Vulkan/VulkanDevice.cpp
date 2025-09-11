@@ -129,7 +129,7 @@ namespace AstralEngine::Vulkan {
 
         VkPhysicalDeviceProperties properties;
         vkGetPhysicalDeviceProperties(m_physicalDevice, &properties);
-        AE_INFO("Fiziksel Cihaz Seçildi: %s", properties.deviceName);
+        AE_INFO("Fiziksel Cihaz Seçildi: {}", properties.deviceName);
     }
 
     void VulkanDevice::createLogicalDevice() {

@@ -1,52 +1,33 @@
-# Motoru statik bir kütüphane olarak tanımla
-add_library(AstralEngine STATIC
-    # Core modules
-    Core/Logger.cpp
-    Core/ConfigManager.cpp
-    Core/AssetManager.cpp
-    Core/AssetLocator.cpp
-    Core/ThreadPool.cpp
-    Core/PerformanceMonitor.cpp
-    Core/EngineConfig.cpp
-    Core/AssetDependency.cpp
-    
-    # Platform abstraction
-    Platform/Window.cpp
-    
-    # Event system
-    Events/EventManager.cpp
-    
-    # Renderer modules
-    Renderer/Renderer.cpp
-    Renderer/VMA_Implementation.cpp
-    Renderer/Vulkan/VulkanDevice.cpp
-    Renderer/Vulkan/VulkanSwapChain.cpp
-    Renderer/Vulkan/VulkanPipeline.cpp
-    Renderer/Vulkan/VulkanBuffer.cpp
-    Renderer/Vulkan/VulkanUtils.cpp
-    Renderer/Vulkan/DescriptorSetManager.cpp
-    Renderer/Model.cpp
-    Renderer/Camera.cpp
-    Renderer/Texture.cpp
-    Renderer/UnifiedMaterial.cpp
-    Renderer/UnifiedMaterialConstants.cpp
-    Renderer/Shader.cpp
-    
-    # ECS modules (modern archetype-based system)
-    ECS/Components.cpp
-    ECS/Scene.cpp
-    ECS/ArchetypeECS.cpp
-    # ECS/ECSTest.cpp  # Test file - not part of main library
-    
-    # Memory management
-    Core/MemoryManager.cpp
-    
-    # Advanced rendering
-    Renderer/ShadowMapping.cpp
-    Renderer/MaterialShaderManager.cpp
-    
-    # Legacy Entity system removed - use ArchetypeECS instead
+# Add subdirectories
+add_subdirectory(Core)
+add_subdirectory(ECS)
+add_subdirectory(Events)
+add_subdirectory(Platform)
+add_subdirectory(Renderer)
+add_subdirectory(UI)
+add_subdirectory(2D)
+add_subdirectory(Asset)
+
+# Create the main AstralEngine library (empty library that links all sublibraries)
+add_library(AstralEngine INTERFACE)
+
+# Link all the sublibraries
+target_link_libraries(AstralEngine INTERFACE
+    AstralCore
+    AstralECS
+    AstralEvents
+    AstralPlatform
+    AstralRenderer
+    AstralUI
+    Astral2D
+    AstralAsset
 )
 
-# Kütüphanenin public arayüzü için include dizinini belirt
-target_include_directories(AstralEngine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+# Include directories
+target_include_directories(AstralEngine INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+# Test executable
+add_executable(test_renderer test_renderer.cpp)
+target_link_libraries(test_renderer PRIVATE AstralEngine)

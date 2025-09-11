@@ -23,7 +23,7 @@ namespace AstralEngine {
      * shader variants based on material properties. It handles dynamic shader
      * compilation with different defines and preprocessor flags.
      */
-    class MaterialShaderManager {
+     class MaterialShaderManager {
     public:
         explicit MaterialShaderManager(Vulkan::VulkanDevice& device);
         ~MaterialShaderManager() = default;
@@ -48,39 +48,17 @@ namespace AstralEngine {
          */
         std::shared_ptr<Shader> getShader(const std::string& variant);
 
-        /**
-         * @brief Precompile common shader variants for faster runtime performance
-         */
-        void precompileCommonVariants();
+        // Offline build: no runtime precompilation
+        void precompileCommonVariants() = delete;
 
-        /**
-         * @brief Enable/disable hot reloading of shaders during development
-         * @param enable Whether to enable hot reloading
-         */
-        void setHotReloadEnabled(bool enable) { m_hotReloadEnabled = enable; }
-
-        /**
-         * @brief Check if hot reloading is enabled
-         * @return True if hot reloading is enabled
-         */
-        bool isHotReloadEnabled() const { return m_hotReloadEnabled; }
+        // Hot-reload functionality removed (offline compilation only)
 
         /**
          * @brief Reload all cached shaders (useful for development)
          */
-        void reloadShaders();
+        void reloadShaders() = delete; // Hot reload disabled in offline-only pipeline
 
-        /**
-         * @brief Set the vertex shader path for all variants
-         * @param path Path to the vertex shader file
-         */
-        void setVertexShaderPath(const std::string& path) { m_vertexShaderPath = path; }
-
-        /**
-         * @brief Set the fragment shader path for all variants
-         * @param path Path to the fragment shader file
-         */
-        void setFragmentShaderPath(const std::string& path) { m_fragmentShaderPath = path; }
+        // Shader base paths now hardcoded for offline build (unified_pbr.vert + variants for .frag)
 
         /**
          * @brief Get the number of compiled shader variants
@@ -111,19 +89,14 @@ namespace AstralEngine {
          * @param variant Shader variant defines string
          * @return Compiled shader or nullptr if compilation failed
          */
-        std::shared_ptr<Shader> compileShader(const std::string& variant);
+        std::shared_ptr<Shader> createShaderFromVariant(const std::string& variant);
+        std::string pickFragmentShaderBaseFromVariant(const std::string& variant) const;
 
         // Device reference
         Vulkan::VulkanDevice& m_device;
 
-        // Shader cache: variant string -> compiled shader
+        // Shader cache: variant string -> compiled shader (loaded from offline SPIR-V)
         std::unordered_map<std::string, std::shared_ptr<Shader>> m_shaderCache;
-
-        // Shader paths
-        std::string m_vertexShaderPath = "unified_pbr.vert";
-        std::string m_fragmentShaderPath = "unified_pbr.frag";
-        // Hot reload support
-        bool m_hotReloadEnabled = false;
 
         // Common defines that are added to all shaders
         static const std::vector<std::string> s_commonDefines;

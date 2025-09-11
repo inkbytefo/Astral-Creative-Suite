@@ -9,6 +9,11 @@
 #include <atomic>
 #include <filesystem>
 #include <glm/glm.hpp>
+
+// Enable GLM hash functions for C++17
+#ifndef GLM_FORCE_CXX17
+#define GLM_FORCE_CXX17
+#endif
 #include <glm/gtx/hash.hpp>
 #include <vulkan/vulkan.h>
 #include "Core/AssetDependency.h"
