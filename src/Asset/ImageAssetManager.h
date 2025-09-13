@@ -1,10 +1,9 @@
 #pragma once
 
+#include "Core/AssetManager.h"
+#include "2D/Layers/Layer.h"
 #include <string>
-#include <memory>
 #include <vector>
-#include "Renderer/Texture.h"
-#include "2D/Layer.h"
 
 namespace AstralEngine {
     namespace Asset {

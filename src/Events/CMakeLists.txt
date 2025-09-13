@@ -9,9 +9,13 @@ set(EVENTS_HEADERS
     EventManager.h
     Events.h
     InputEvent.h
+    SystemEvent.h
 )
 
 add_library(AstralEvents ${EVENTS_SOURCES} ${EVENTS_HEADERS})
+
+# Define alias for better compatibility
+add_library(Astral::Events ALIAS AstralEvents)
 
 # Link dependencies
 target_link_libraries(AstralEvents PUBLIC

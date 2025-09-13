@@ -56,28 +56,11 @@ namespace AstralEngine {
             glm::vec2 m_endPos;
         };
         
-        // Brush tool
-        class BrushTool2D : public Tool {
-        public:
-            BrushTool2D(BrushSystem& brushSystem) : Tool("Brush"), m_brushSystem(brushSystem) {}
-            
-            void activate() override;
-            void deactivate() override;
-            void onMouseDown(const glm::vec2& position, ECS::EntityID canvasId) override;
-            void onMouseUp(const glm::vec2& position, ECS::EntityID canvasId) override;
-            void onMouseMove(const glm::vec2& position, ECS::EntityID canvasId) override;
-            void render() override;
-            
-        private:
-            BrushSystem& m_brushSystem;
-            bool m_drawing = false;
-        };
-        
         // Eraser tool
         class EraserTool : public Tool {
         public:
-            EraserTool(BrushSystem& brushSystem) : Tool("Eraser"), m_brushSystem(brushSystem) {}
-            
+            EraserTool(BrushSystem& brushSystem, class LayerSystem& layerSystem) : Tool("Eraser"), m_brushSystem(brushSystem), m_layerSystem(layerSystem) {}
+
             void activate() override;
             void deactivate() override;
             void onMouseDown(const glm::vec2& position, ECS::EntityID canvasId) override;
@@ -87,6 +70,7 @@ namespace AstralEngine {
             
         private:
             BrushSystem& m_brushSystem;
+            LayerSystem& m_layerSystem;
             bool m_erasing = false;
         };
         

@@ -1,7 +1,7 @@
 #include "2D/Canvas/Canvas.h"
 #include "Core/Logger.h"
 #include "2D/Layers/Layer.h"
-#include "Renderer/Renderer.h"
+#include "Renderer/RRenderer.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Model.h"
 #include <glm/gtc/matrix_transform.hpp>
@@ -30,8 +30,13 @@ namespace AstralEngine {
             return glm::vec2(screenPos.x, screenPos.y);
         }
         
+        CanvasSystem::CanvasSystem(ECS::Scene& scene) 
+            : m_scene(scene), m_renderer(nullptr) {
+            AE_INFO("CanvasSystem başlatıldı (Renderer olmadan)");
+        }
+
         CanvasSystem::CanvasSystem(ECS::Scene& scene, Renderer& renderer) 
-            : m_scene(scene), m_renderer(renderer) {
+            : m_scene(scene), m_renderer(&renderer) {
             AE_INFO("CanvasSystem başlatıldı");
         }
         

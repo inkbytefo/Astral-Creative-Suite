@@ -1,7 +1,7 @@
 #include "ShadowMapping.h"
 #include "Core/Logger.h"
-#include "Renderer/Vulkan/VulkanDevice.h"
-#include "Renderer/Vulkan/VulkanBuffer.h"
+#include "Renderer/VulkanR/VulkanDevice.h"
+#include "Renderer/VulkanR/VulkanBuffer.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Camera.h"
 #include "ECS/Components.h"
@@ -666,38 +666,14 @@ void ShadowMapManager::createShadowPipeline() {
     AE_DEBUG("Loading shadow depth shader: shadow_depth.vert");
     Shader depthShader(m_device, "shadow_depth.vert"); // Depth-only vertex shader
     
-    // Vertex input description (same as main renderer)
-    VkVertexInputBindingDescription bindingDescription{};
-    bindingDescription.binding = 0;
-    bindingDescription.stride = sizeof(float) * 11; // position(3) + color(3) + normal(3) + texcoord(2)
-    bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
-    
-    std::array<VkVertexInputAttributeDescription, 4> attributeDescriptions{};
-    // Position
-    attributeDescriptions[0].binding = 0;
-    attributeDescriptions[0].location = 0;
-    attributeDescriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT;
-    attributeDescriptions[0].offset = 0;
-    // Color (not used but needed for vertex format compatibility)
-    attributeDescriptions[1].binding = 0;
-    attributeDescriptions[1].location = 1;
-    attributeDescriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT;
-    attributeDescriptions[1].offset = sizeof(float) * 3;
-    // Normal (not used but needed for vertex format compatibility)
-    attributeDescriptions[2].binding = 0;
-    attributeDescriptions[2].location = 2;
-    attributeDescriptions[2].format = VK_FORMAT_R32G32B32_SFLOAT;
-    attributeDescriptions[2].offset = sizeof(float) * 6;
-    // TexCoord (not used but needed for vertex format compatibility)
-    attributeDescriptions[3].binding = 0;
-    attributeDescriptions[3].location = 3;
-    attributeDescriptions[3].format = VK_FORMAT_R32G32_SFLOAT;
-    attributeDescriptions[3].offset = sizeof(float) * 9;
+    // Vertex input description from Model's Vertex struct
+    auto bindingDescriptions = AstralEngine::Vertex::getBindingDescriptions();
+    auto attributeDescriptions = AstralEngine::Vertex::getAttributeDescriptions();
     
     VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
     vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-    vertexInputInfo.vertexBindingDescriptionCount = 1;
-    vertexInputInfo.pVertexBindingDescriptions = &bindingDescription;
+    vertexInputInfo.vertexBindingDescriptionCount = static_cast<uint32_t>(bindingDescriptions.size());
+    vertexInputInfo.pVertexBindingDescriptions = bindingDescriptions.data();
     vertexInputInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescriptions.size());
     vertexInputInfo.pVertexAttributeDescriptions = attributeDescriptions.data();
     
@@ -1248,6 +1224,44 @@ void debugDrawCascadeFrustum(const ShadowCascade& cascade, const glm::vec3& colo
 
 // Legacy compatibility wrapper
 std::vector<float> calculateCSMSplits(float nearPlane, float farPlane, uint32_t cascadeCount, float lambda) {
+    AE_WARN("Using deprecated calculateCSMSplits - use computeCascadeSplits instead");
+    return computeCascadeSplits(nearPlane, farPlane, cascadeCount, lambda);
+}
+
+} // namespace ShadowUtils
+
+// ShadowRenderer implementation
+ShadowRenderer::ShadowRenderer(Vulkan::VulkanDevice& device, ShadowMapManager& shadowManager)
+    : m_device(device), m_shadowManager(shadowManager) {
+}
+
+void ShadowRenderer::renderShadowMaps(
+    VkCommandBuffer commandBuffer,
+    const std::vector<LightShadowData>& lightShadows,
+    const std::vector<class RenderObject>& objects
+) {
+    // Stub - TODO: Implement shadow rendering
+    AE_DEBUG("Rendering shadow maps for {} lights", lightShadows.size());
+}
+
+void ShadowRenderer::bindShadowResources(
+    VkCommandBuffer commandBuffer,
+    VkPipelineLayout pipelineLayout,
+    uint32_t descriptorSetIndex
+) {
+    // Stub - TODO: Implement shadow resource binding
+}
+
+void ShadowRenderer::renderDirectionalShadow(
+    VkCommandBuffer commandBuffer,
+    const DirectionalLightShadow& shadowData,
+    const std::vector<class RenderObject>& objects
+) {
+    // Stub - TODO: Implement directional shadow rendering
+}
+
+} // namespace AstralEngine
+nt, float lambda) {
     AE_WARN("Using deprecated calculateCSMSplits - use computeCascadeSplits instead");
     return computeCascadeSplits(nearPlane, farPlane, cascadeCount, lambda);
 }

@@ -11,7 +11,7 @@
 // Forward declarations
 namespace AstralEngine {
     class UnifiedMaterialInstance;
-    class Model;
+    class ModelAsset;
 }
 
 namespace AstralEngine::ECS {
@@ -56,7 +56,7 @@ namespace AstralEngine::ECS {
 
     // Render component for entities that should be drawn
     struct RenderComponent : public IComponent {
-        std::shared_ptr<Model> model;
+        std::shared_ptr<ModelAsset> modelAsset;
         
         // Optional material override (for special cases)
         std::shared_ptr<UnifiedMaterialInstance> materialOverride;
@@ -76,13 +76,13 @@ namespace AstralEngine::ECS {
         float boundingSphereRadius = 1.0f;
         
         RenderComponent() = default;
-        explicit RenderComponent(std::shared_ptr<Model> m) : model(m) {}
-        RenderComponent(std::shared_ptr<Model> m, std::shared_ptr<UnifiedMaterialInstance> override)
-            : model(m), materialOverride(override) {}
+        explicit RenderComponent(std::shared_ptr<ModelAsset> m) : modelAsset(m) {}
+        RenderComponent(std::shared_ptr<ModelAsset> m, std::shared_ptr<UnifiedMaterialInstance> override)
+            : modelAsset(m), materialOverride(override) {}
         
         // Helper methods
-        void setModel(std::shared_ptr<Model> m) { model = m; }
-        std::shared_ptr<Model> getModel() const { return model; }
+        void setModel(std::shared_ptr<ModelAsset> m) { modelAsset = m; }
+        std::shared_ptr<ModelAsset> getModel() const { return modelAsset; }
         
         // Get effective material for a submesh (override or from model)
         std::shared_ptr<UnifiedMaterialInstance> getEffectiveMaterial(uint32_t submeshIndex = 0) const;

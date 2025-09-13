@@ -1,6 +1,6 @@
 #include "2D/Tools/Brush.h"
 #include "Core/Logger.h"
-#include "Renderer/Renderer.h"
+#include "Renderer/RRenderer.h"
 #include "Renderer/Texture.h"
 #include "2D/Layers/Layer.h"
 #include <algorithm>
@@ -75,10 +75,16 @@ namespace AstralEngine {
                 return;
             }
             
+            // Get the layer
+            auto& layer = m_scene.getComponent<Layer>(layerId);
+            
             // For now, we'll just log the operation
             // In a full implementation, we would actually erase from the layer's texture
             AE_DEBUG("Silgi darbesi uygulanıyor: {} nokta, layer {}", 
                      stroke.points.size(), layerId);
+            
+            // Rasterize the stroke for erasing
+            rasterizeStroke(layerId, stroke);
         }
         
         void BrushSystem::applyPressure(float pressure) {

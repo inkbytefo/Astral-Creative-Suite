@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASTRAL_ENGINE_ENGINE_CONFIG_H
+#define ASTRAL_ENGINE_ENGINE_CONFIG_H
 
 namespace AstralEngine {
     struct EngineConfig {
@@ -40,3 +41,5 @@ namespace AstralEngine {
     // Convenience macro
     #define ENGINE_CONFIG() ::AstralEngine::EngineConfig::getInstance()
 }
+
+#endif // ASTRAL_ENGINE_ENGINE_CONFIG_H

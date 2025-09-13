@@ -1,8 +1,8 @@
 #include "Texture.h"
 #include "Core/Logger.h"
-#include "Renderer/Vulkan/VulkanBuffer.h"
-#include "Renderer/Vulkan/VulkanDevice.h"
-#include "Renderer/Vulkan/VulkanUtils.h"
+#include "Renderer/VulkanR/VulkanBuffer.h"
+#include "Renderer/VulkanR/VulkanDevice.h"
+#include "Renderer/VulkanR/VulkanUtils.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>

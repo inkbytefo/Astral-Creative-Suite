@@ -1,5 +1,7 @@
 #include "EventManager.h"
 #include <algorithm>
+#include <stdexcept>
+#include <sstream>
 
 namespace AstralEngine {
 
@@ -10,7 +12,9 @@ namespace AstralEngine {
 
     EventSubscription EventManager::subscribe(EventType eventType, const EventHandler& handler, EventPriority priority) {
         if (!handler) {
-            AE_WARN("Attempting to subscribe with null handler for event type {}", static_cast<uint32_t>(eventType));
+            std::stringstream ss;
+            ss << "Attempting to subscribe with null handler for event type " << static_cast<uint32_t>(eventType);
+            AE_WARN(ss.str());
             return EventSubscription();
         }
 
@@ -29,8 +33,9 @@ namespace AstralEngine {
         }
         
         if (m_loggingEnabled) {
-            AE_DEBUG("Event subscription created: ID={}, Type={}, Priority={}", 
-                    subscriptionId, static_cast<uint32_t>(eventType), static_cast<uint8_t>(priority));
+            std::stringstream ss;
+            ss << "Event subscription created: ID=" << subscriptionId << ", Type=" << static_cast<uint32_t>(eventType) << ", Priority=" << static_cast<uint8_t>(priority);
+            AE_DEBUG(ss.str());
         }
         
         return EventSubscription(this, subscriptionId);
@@ -50,7 +55,9 @@ namespace AstralEngine {
 
     EventSubscription EventManager::subscribe(EventType eventType, IEventListener* listener, EventPriority priority) {
         if (!listener) {
-            AE_WARN("Attempting to subscribe with null listener for event type {}", static_cast<uint32_t>(eventType));
+            std::stringstream ss;
+            ss << "Attempting to subscribe with null listener for event type " << static_cast<uint32_t>(eventType);
+            AE_WARN(ss.str());
             return EventSubscription();
         }
         
@@ -90,14 +97,20 @@ namespace AstralEngine {
                         // Stop processing if event was handled and marked as such
                         if (event.handled) {
                             if (m_loggingEnabled) {
-                                AE_DEBUG("Event handled by subscription ID={}, stopping propagation", subscription.id);
+                                std::stringstream ss;
+                                ss << "Event handled by subscription ID=" << subscription.id << ", stopping propagation";
+                                AE_DEBUG(ss.str());
                             }
                             break;
                         }
                     } catch (const std::exception& e) {
-                        AE_ERROR("Exception in event handler (subscription ID={}): {}", subscription.id, e.what());
+                        std::stringstream ss;
+                        ss << "Exception in event handler (subscription ID=" << subscription.id << "): " << e.what();
+                        AE_ERROR(ss.str());
                     } catch (...) {
-                        AE_ERROR("Unknown exception in event handler (subscription ID={})", subscription.id);
+                        std::stringstream ss;
+                        ss << "Unknown exception in event handler (subscription ID=" << subscription.id << ")";
+                        AE_ERROR(ss.str());
                     }
                 }
             }
@@ -109,7 +122,9 @@ namespace AstralEngine {
         }
         
         if (m_loggingEnabled) {
-            AE_DEBUG("Event dispatch complete: handled={}", handled);
+            std::stringstream ss;
+            ss << "Event dispatch complete: handled=" << handled;
+            AE_DEBUG(ss.str());
         }
         
         return handled;
@@ -206,8 +221,9 @@ namespace AstralEngine {
                 }
                 
                 if (m_loggingEnabled) {
-                    AE_DEBUG("Event subscription marked inactive: ID={}, Type={}", 
-                            subscriptionId, static_cast<uint32_t>(eventType));
+                    std::stringstream ss;
+                    ss << "Event subscription marked inactive: ID=" << subscriptionId << ", Type=" << static_cast<uint32_t>(eventType);
+                    AE_DEBUG(ss.str());
                 }
                 
                 // Schedule cleanup
@@ -230,7 +246,9 @@ namespace AstralEngine {
                 m_stats.activeSubscriptions -= count;
             }
             
-            AE_DEBUG("Removed all {} subscriptions for event type {}", count, static_cast<uint32_t>(eventType));
+            std::stringstream ss;
+            ss << "Removed all " << count << " subscriptions for event type " << static_cast<uint32_t>(eventType);
+            AE_DEBUG(ss.str());
         }
     }
 
@@ -249,7 +267,9 @@ namespace AstralEngine {
             m_stats.activeSubscriptions = 0;
         }
         
-        AE_DEBUG("Removed all {} event subscriptions", totalCount);
+        std::stringstream ss;
+        ss << "Removed all " << totalCount << " event subscriptions";
+        AE_DEBUG(ss.str());
     }
 
     size_t EventManager::getSubscriberCount(EventType eventType) const {
@@ -287,29 +307,51 @@ namespace AstralEngine {
 
     void EventManager::logDebugInfo() const {
         AE_INFO("=== Event Manager Debug Info ===");
-        AE_INFO("Enabled: {}", m_enabled.load());
-        AE_INFO("Logging Enabled: {}", m_loggingEnabled.load());
-        AE_INFO("Queued Events: {}", getQueuedEventCount());
-        AE_INFO("Total Subscribers: {}", getTotalSubscriberCount());
+        std::stringstream ss1;
+        ss1 << "Enabled: " << m_enabled.load();
+        AE_INFO(ss1.str());
+        std::stringstream ss2;
+        ss2 << "Logging Enabled: " << m_loggingEnabled.load();
+        AE_INFO(ss2.str());
+        std::stringstream ss3;
+        ss3 << "Queued Events: " << getQueuedEventCount();
+        AE_INFO(ss3.str());
+        std::stringstream ss4;
+        ss4 << "Total Subscribers: " << getTotalSubscriberCount();
+        AE_INFO(ss4.str());
         
         {
             std::lock_guard<std::mutex> lock(m_subscribersMutex);
-            AE_INFO("Event Types Subscribed: {}", m_subscribers.size());
+            std::stringstream ss5;
+            ss5 << "Event Types Subscribed: " << m_subscribers.size();
+            AE_INFO(ss5.str());
             
             for (const auto& [eventType, subscribers] : m_subscribers) {
                 size_t activeCount = std::count_if(subscribers.begin(), subscribers.end(),
                     [](const EventSubscriptionInfo& info) { return info.active; });
-                AE_INFO("  Type {}: {} active subscribers", static_cast<uint32_t>(eventType), activeCount);
+                std::stringstream ss6;
+                ss6 << "  Type " << static_cast<uint32_t>(eventType) << ": " << activeCount << " active subscribers";
+                AE_INFO(ss6.str());
             }
         }
         
         auto stats = getStats();
         AE_INFO("Statistics:");
-        AE_INFO("  Total Events Dispatched: {}", stats.totalEventsDispatched);
-        AE_INFO("  Total Events Queued: {}", stats.totalEventsQueued);
-        AE_INFO("  Total Events Processed: {}", stats.totalEventsProcessed);
-        AE_INFO("  Total Subscriptions Created: {}", stats.totalSubscriptions);
-        AE_INFO("  Active Subscriptions: {}", stats.activeSubscriptions);
+        std::stringstream ss7;
+        ss7 << "  Total Events Dispatched: " << stats.totalEventsDispatched;
+        AE_INFO(ss7.str());
+        std::stringstream ss8;
+        ss8 << "  Total Events Queued: " << stats.totalEventsQueued;
+        AE_INFO(ss8.str());
+        std::stringstream ss9;
+        ss9 << "  Total Events Processed: " << stats.totalEventsProcessed;
+        AE_INFO(ss9.str());
+        std::stringstream ss10;
+        ss10 << "  Total Subscriptions Created: " << stats.totalSubscriptions;
+        AE_INFO(ss10.str());
+        std::stringstream ss11;
+        ss11 << " Active Subscriptions: " << stats.activeSubscriptions;
+        AE_INFO(ss11.str());
         AE_INFO("================================");
     }
 
@@ -333,15 +375,18 @@ namespace AstralEngine {
             
             size_t removedCount = beforeSize - subscribers.size();
             if (removedCount > 0 && m_loggingEnabled) {
-                AE_DEBUG("Cleaned up {} inactive subscriptions for event type {}", 
-                        removedCount, static_cast<uint32_t>(eventType));
+                std::stringstream ss;
+                ss << "Cleaned up " << removedCount << " inactive subscriptions for event type " << static_cast<uint32_t>(eventType);
+                AE_DEBUG(ss.str());
             }
         }
     }
 
     void EventManager::logEvent(const Event& event, const char* action) const {
         if (m_loggingEnabled) {
-            AE_DEBUG("{} event: {} [{}]", action, event.getName(), event.toString());
+            std::stringstream ss;
+            ss << action << " event: " << event.getName() << " [" << event.toString() << "]";
+            AE_DEBUG(ss.str());
         }
     }
 

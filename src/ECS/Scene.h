@@ -64,7 +64,6 @@ namespace AstralEngine::ECS {
         
         // System access
         TransformSystem& getTransformSystem() { return m_transformSystem; }
-        RenderSystem& getRenderSystem() { return m_renderSystem; }
 
         // Camera management
         void setMainCamera(EntityID camera);
@@ -87,7 +86,6 @@ namespace AstralEngine::ECS {
     private:
         ArchetypeRegistry m_registry;
         TransformSystem m_transformSystem;
-        RenderSystem m_renderSystem;
         EntityID m_mainCameraEntity = INVALID_ENTITY;
     };
 

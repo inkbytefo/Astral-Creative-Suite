@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASTRAL_ENGINE_EVENTS_H
+#define ASTRAL_ENGINE_EVENTS_H
 
 /**
  * @file Events.h
@@ -16,6 +17,7 @@
 // Specific event types
 #include "ApplicationEvent.h"
 #include "InputEvent.h"
+#include "SystemEvent.h"
 
 namespace AstralEngine {
     
@@ -47,3 +49,5 @@ namespace AstralEngine {
     }
     
 } // namespace AstralEngine
+
+#endif // ASTRAL_ENGINE_EVENTS_H

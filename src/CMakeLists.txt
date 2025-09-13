@@ -6,6 +6,7 @@ add_subdirectory(Platform)
 add_subdirectory(Renderer)
 add_subdirectory(UI)
 add_subdirectory(2D)
+add_subdirectory(3D)
 add_subdirectory(Asset)
 
 # Create the main AstralEngine library (empty library that links all sublibraries)
@@ -22,6 +23,9 @@ target_link_libraries(AstralEngine INTERFACE
     Astral2D
     AstralAsset
 )
+
+# Add alias for better compatibility
+add_library(Astral::Engine ALIAS AstralEngine)
 
 # Include directories
 target_include_directories(AstralEngine INTERFACE

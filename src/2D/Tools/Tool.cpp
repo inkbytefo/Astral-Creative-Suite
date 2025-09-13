@@ -1,6 +1,6 @@
 #include "2D/Tools/Tool.h"
 #include "Core/Logger.h"
-#include "Renderer/Renderer.h"
+#include "Renderer/RRenderer.h"
 #include <algorithm>
 
 namespace AstralEngine {
@@ -52,7 +52,6 @@ namespace AstralEngine {
         void BrushTool2D::onMouseDown(const glm::vec2& position, ECS::EntityID canvasId) {
             m_drawing = true;
             m_brushSystem.beginStroke(position);
-            AE_DEBUG("Brush tool mouse down at ({}, {})", position.x, position.y);
         }
         
         void BrushTool2D::onMouseUp(const glm::vec2& position, ECS::EntityID canvasId) {
@@ -60,14 +59,12 @@ namespace AstralEngine {
                 m_brushSystem.addPointToStroke(position);
                 m_brushSystem.endStroke();
                 m_drawing = false;
-                AE_DEBUG("Brush tool mouse up at ({}, {})", position.x, position.y);
             }
         }
         
         void BrushTool2D::onMouseMove(const glm::vec2& position, ECS::EntityID canvasId) {
             if (m_drawing) {
                 m_brushSystem.addPointToStroke(position);
-                AE_DEBUG("Brush tool mouse move at ({}, {})", position.x, position.y);
             }
         }
         
@@ -100,6 +97,11 @@ namespace AstralEngine {
         void EraserTool::onMouseUp(const glm::vec2& position, ECS::EntityID canvasId) {
             if (m_erasing) {
                 m_brushSystem.addPointToStroke(position);
+                const auto& stroke = m_brushSystem.getCurrentStroke();
+                auto layers = m_layerSystem.getLayerStack();
+                if (!layers.empty()) {
+                    m_brushSystem.eraseStroke(layers[0], stroke);
+                }
                 m_brushSystem.endStroke();
                 m_erasing = false;
                 AE_DEBUG("Eraser tool mouse up at ({}, {})", position.x, position.y);

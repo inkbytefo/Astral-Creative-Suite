@@ -1,6 +1,9 @@
-#pragma once
+#ifndef ASTRAL_ENGINE_ASSET_LOCATOR_H
+#define ASTRAL_ENGINE_ASSET_LOCATOR_H
 
 #include <string>
+#include <vector>
+#include <mutex>
 
 namespace AstralEngine {
     class AssetLocator {
@@ -10,18 +13,32 @@ namespace AstralEngine {
             return instance;
         }
         
-        void initialize(const std::string& executablePath) {
-            // Initialize asset locator with executable path
-        }
+        void initialize(const std::string& executablePath);
+        bool validateCriticalAssets();
+        std::string getAssetPath(const std::string& assetName) const;
         
-        bool validateCriticalAssets() {
-            // Validate that critical assets are available
-            return true; // For now, assume all assets are available
-        }
+        // Platform-specific path handling
+        std::string getPlatformSpecificPath(const std::string& assetName) const;
         
-        std::string getAssetPath(const std::string& assetName) {
-            // Return the full path to an asset
-            return "assets/" + assetName;
-        }
+        // Asset search paths
+        void addSearchPath(const std::string& path);
+        void removeSearchPath(const std::string& path);
+        const std::vector<std::string>& getSearchPaths() const;
+        
+        // Utility functions
+        bool fileExists(const std::string& filePath) const;
+        std::string getExecutablePath() const;
+        std::string getBaseAssetPath() const;
+        
+    private:
+        AssetLocator() = default;
+        ~AssetLocator() = default;
+        
+        std::string m_executablePath;
+        std::string m_baseAssetPath;
+        std::vector<std::string> m_searchPaths;
+        mutable std::mutex m_mutex;
     };
 }
+
+#endif // ASTRAL_ENGINE_ASSET_LOCATOR_H

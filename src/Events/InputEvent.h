@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASTRAL_ENGINE_INPUT_EVENT_H
+#define ASTRAL_ENGINE_INPUT_EVENT_H
 
 #include "Event.h"
 #include <sstream>
@@ -330,3 +331,5 @@ namespace AstralEngine {
     }
 
 } // namespace AstralEngine
+
+#endif // ASTRAL_ENGINE_INPUT_EVENT_H

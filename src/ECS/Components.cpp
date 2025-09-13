@@ -2,6 +2,7 @@
 #include "ArchetypeECS.h"
 #include "Renderer/Model.h"
 #include "Renderer/UnifiedMaterial.h"
+#include "Asset/ModelAsset.h" // Add full definition for ModelAsset
 
 namespace AstralEngine::ECS {
 
@@ -23,11 +24,18 @@ namespace AstralEngine::ECS {
         return worldMatrix;
     }
     
-    std::shared_ptr<UnifiedMaterialInstance> RenderComponent::getEffectiveMaterial(uint32_t submeshIndex) const {
+        std::shared_ptr<UnifiedMaterialInstance> RenderComponent::getEffectiveMaterial(uint32_t submeshIndex) const {
         if (materialOverride) {
             return materialOverride;
         }
-        return model ? model->getSubmeshMaterial(submeshIndex) : nullptr;
+        if (modelAsset && modelAsset->isLoaded()) {
+            auto model = modelAsset->getModel();
+            if (model) {
+                return model->getSubmeshMaterial(submeshIndex);
+            }
+        }
+        return nullptr;
     }
+
 
 } // namespace AstralEngine::ECS

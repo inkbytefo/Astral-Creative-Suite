@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASTRAL_ENGINE_EVENT_H
+#define ASTRAL_ENGINE_EVENT_H
 
 #include "Core/Logger.h"
 #include <string>
@@ -57,6 +58,11 @@ namespace AstralEngine {
         AssetLoaded = 301,
         AssetUnloaded = 302,
         ShaderRecompiled = 303,
+        BatteryLevelChange = 304,
+        NetworkConnectionChange = 305,
+        MemoryPressure = 306,
+        SystemThemeChange = 307,
+        StorageSpaceChange = 308,
         
         // Custom/User Events (1000+)
         Custom = 1000
@@ -214,3 +220,5 @@ namespace AstralEngine {
     };
     
 } // namespace AstralEngine
+
+#endif // ASTRAL_ENGINE_EVENT_H

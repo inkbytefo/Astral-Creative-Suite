@@ -5,304 +5,145 @@
 #include "Core/EngineConfig.h"
 #include "Core/MemoryManager.h"
 #include "Platform/Window.h"
-#include "Renderer/RendererComponents.h"
+#include "ECS/RenderComponents.h"
 #include "Events/Events.h"
 #include "ECS/ECS.h"
 #include "ECS/ArchetypeECS.h"
 #include "UI/UIManager.h"
-#include "2D/Layer.h"
-#include "2D/Brush.h"
-#include "2D/Canvas.h"
-#include "2D/Tool.h"
+#include "2D/Layers/Layer.h"
+#include "2D/Tools/Brush.h"
+#include "2D/Canvas/Canvas.h"
+#include "2D/Tools/Tool.h"
 #include "Asset/ImageAssetManager.h"
+#include "Asset/ModelAsset.h"
+#include "Renderer/RRenderer.h"
+
+#include <imgui.h>
 #include <stdexcept>
 #include <chrono>
 #include <thread>
 
+
+
+
 int main(int argc, char* argv[]) {
     try {
-        // Logger'ı başlat (bu ilk çağrı olmalı)
         AstralEngine::Logger::Init();
-        
-        AE_INFO("Astral Creative Suite Başlatılıyor...");
-        AE_DEBUG("Argümanlar: {} adet", argc);
-        
-        // AssetLocator'ı initialize et (logger'dan sonra, diğerlerinden önce)
+        AE_INFO("Astral Creative Suite Starting...");
+
         AstralEngine::AssetLocator::getInstance().initialize(argv[0]);
-        
-        // Critical assets'leri validate et
         if (!AstralEngine::AssetLocator::getInstance().validateCriticalAssets()) {
             AE_ERROR("Critical asset validation failed - cannot continue");
             return -1;
         }
-        
-        // Memory Manager'ı başlat
-        AE_INFO("Memory Manager başlatılıyor...");
-        AstralEngine::Memory::MemoryManager::getInstance().initialize(16, 8); // 16MB frame, 8MB stack
-        AE_INFO("Memory Manager başarıyla başlatıldı");
-        
-        // Engine configuration'ı başlat ve uygula
+
+        AstralEngine::Memory::MemoryManager::getInstance().initialize(16, 8);
         auto& config = AstralEngine::EngineConfig::getInstance();
         config.applyRuntimeLimits();
-        
-        // Event system'ini başlat
         AstralEngine::InitializeEventSystem();
-        
-        // Performance monitoring'i başlat
+
         if (config.enablePerformanceMonitoring) {
             AstralEngine::PerformanceMonitor::setSlowOperationThreshold(config.slowOperationThresholdMs);
-            AE_INFO("Performance monitoring enabled (threshold: {:.1f}ms)", config.slowOperationThresholdMs);
         }
-        
-        // Hata ayıklama bilgisi
-        AE_DEBUG("Debug modu etkin");
-        AE_DEBUG("İşletim sistemi: Windows");
-        AE_DEBUG("CPU çekirdek sayısı: {}", std::thread::hardware_concurrency());
-        AE_DEBUG("Target FPS: {}, Max FPS: {}", config.targetFrameRate, config.maxFrameRate);
-        
-        // AssetManager'ı başlat
-        AE_DEBUG("AssetManager başlatılıyor...");
-        AstralEngine::AssetManager::init();
-        AE_INFO("AssetManager başarıyla başlatıldı");
 
-        // Window ve Renderer initialization
+        AstralEngine::AssetManager::init();
+
         try {
-            AE_DEBUG("Pencere oluşturuluyor...");
-            
-            // Create window with modern configuration approach
             AstralEngine::WindowConfig windowConfig = AstralEngine::WindowConfig::fromEngineConfig();
             windowConfig.title = "Astral Creative Suite v1.0";
-            windowConfig.width = 1200;
-            windowConfig.height = 800;
+            windowConfig.width = 1600;
+            windowConfig.height = 900;
             
             AstralEngine::Window window(windowConfig);
-            AE_INFO("Pencere başarıyla oluşturuldu");
-            
-            AE_DEBUG("Renderer oluşturuluyor...");
             AstralEngine::Renderer renderer(window);
-            AE_INFO("Renderer başarıyla oluşturuldu");
-            
-            // Initialize UI system
+
             AstralEngine::UI::UIManager uiManager;
-            uiManager.initialize();
-            
-            // Create a scene for our editor
-            AE_DEBUG("Sahne oluşturuluyor...");
             AstralEngine::ECS::Scene scene;
             
-            // Create layer system
+            // 2D Systems
             AstralEngine::D2::LayerSystem layerSystem(scene);
-            
-            // Create brush system
             AstralEngine::D2::BrushSystem brushSystem(scene);
-            
-            // Create canvas system
             AstralEngine::D2::CanvasSystem canvasSystem(scene, renderer);
-            
-            // Create tool manager
             AstralEngine::D2::ToolManager toolManager(scene, canvasSystem, brushSystem);
             
-            // Register tools
+            uiManager.Initialize(window, renderer, toolManager);
+
             toolManager.registerTool(std::make_unique<AstralEngine::D2::SelectionTool>());
-            toolManager.registerTool(std::make_unique<AstralEngine::D2::BrushTool2D>(brushSystem));
-            toolManager.registerTool(std::make_unique<AstralEngine::D2::EraserTool>(brushSystem));
-            
-            // Select default tool
+            toolManager.registerTool(std::make_unique<AstralEngine::D2::BrushTool2D>(brushSystem, layerSystem));
+            toolManager.registerTool(std::make_unique<AstralEngine::D2::EraserTool>(brushSystem, layerSystem));
             toolManager.selectTool("Brush");
-            
-            // Create asset manager
-            AstralEngine::Asset::ImageAssetManager assetManager;
-            
-            // Add a default layer
+
             auto baseLayer = layerSystem.addLayer("Background");
-            
-            // Add a canvas
             auto canvasEntity = canvasSystem.createCanvas(1920, 1080);
-            
-            AE_INFO("Sahne başarıyla oluşturuldu");
-            
-            // Set up event handling with the new event system
-            window.setEventCallback([&renderer, &uiManager, &canvasSystem, &toolManager, canvasEntity](AstralEngine::Event& event) {
-                // Pass event to UI manager
-                uiManager.handleEvent(event);
-                
-                AstralEngine::EventDispatcher dispatcher(event);
-                
-                // Handle window resize events
-                dispatcher.dispatch<AstralEngine::WindowResizeEvent>([&renderer](AstralEngine::WindowResizeEvent& e) {
-                    AE_DEBUG("Window resized to {}x{}", e.getWidth(), e.getHeight());
-                    renderer.onFramebufferResize();
-                    return false; // Allow other handlers to process this event
-                });
-                
-                // Handle window close events
-                dispatcher.dispatch<AstralEngine::WindowCloseEvent>([](AstralEngine::WindowCloseEvent& e) {
-                    AE_DEBUG("Window close requested by event system");
-                    return false; // Allow window to close normally
-                });
-                
-                // Handle window focus events
-                dispatcher.dispatch<AstralEngine::WindowFocusEvent>([](AstralEngine::WindowFocusEvent& e) {
-                    AE_DEBUG("Window focus changed: {}", e.isFocused() ? "gained" : "lost");
-                    return false;
-                });
-                
-                // Handle window lost focus events
-                dispatcher.dispatch<AstralEngine::WindowLostFocusEvent>([](AstralEngine::WindowLostFocusEvent& e) {
-                    AE_DEBUG("Window lost focus");
-                    return false;
-                });
-                
-                // Handle window moved events
-                dispatcher.dispatch<AstralEngine::WindowMovedEvent>([](AstralEngine::WindowMovedEvent& e) {
-                    AE_DEBUG("Window moved to ({}, {})", e.getX(), e.getY());
-                    return false;
-                });
-            });
-            
-            AE_INFO("Ana döngü başlıyor...");
-            uint32_t frameCount = 0;
-            uint32_t consecutiveErrors = 0;
-            auto startTime = std::chrono::high_resolution_clock::now();
-            auto lastPerfStatsTime = startTime;
-            
-            while (!window.shouldClose()) {
-                PERF_TIMER("MainLoop");
-                auto frameStart = std::chrono::high_resolution_clock::now();
-                
-                // Reset frame allocator at the start of each frame
-                AstralEngine::Memory::MemoryManager::getInstance().newFrame();
-                
-                frameCount++;
-                
-                // Performance statistics göster (config'e göre)
-                if (config.printPerformanceStats && frameCount % config.performanceStatsInterval == 0) {
-                    auto currentTime = std::chrono::high_resolution_clock::now();
-                    float deltaTime = std::chrono::duration<float>(currentTime - lastPerfStatsTime).count();
-                    float fps = config.performanceStatsInterval / deltaTime;
-                    AE_INFO("Performance: {:.2f} FPS, Frame: {}, Errors: {}", fps, frameCount, consecutiveErrors);
-                    
-                    if (config.enablePerformanceMonitoring) {
-                        AstralEngine::PerformanceMonitor::printStats();
-                    }
-                    
-                    lastPerfStatsTime = currentTime;
-                }
-                
-                {
-                    PERF_TIMER("PollEvents");
-                    window.pollEvents();
-                }
-                
-                // Render UI
-                uiManager.render();
-                
-                // Render canvas
-                canvasSystem.renderCanvas(canvasEntity, layerSystem.getLayerStack());
-                
-                // Render active tool
-                toolManager.render();
-                
-                // Render frame with error handling
-                try {
-                    {
-                        PERF_TIMER("Renderer::DrawFrame");
-                        renderer.drawFrame(scene);
-                    }
-                    
-                    // Reset error counter on successful frame
-                    consecutiveErrors = 0;
-                    
-                } catch (const std::exception& e) {
-                    consecutiveErrors++;
-                    AE_ERROR("Frame çizilirken hata oluştu ({}. hata): {}", consecutiveErrors, e.what());
-                    
-                    // Çok fazla ardışık hata varsa çık
-                    if (consecutiveErrors >= config.maxConsecutiveRenderErrors) {
-                        AE_ERROR("Çok fazla ardışık render hatası ({}), çıkılıyor", consecutiveErrors);
-                        break;
-                    }
-                    
-                    // Hata recovery delay'i
-                    std::this_thread::sleep_for(std::chrono::milliseconds(config.errorRecoveryDelayMs));
-                    continue;
-                }
-                
-                // FPS limiting (sadece gerekiyorsa)
-                if (config.enableFrameRateLimiting) {
-                    auto frameEnd = std::chrono::high_resolution_clock::now();
-                    auto frameDuration = std::chrono::duration_cast<std::chrono::milliseconds>(frameEnd - frameStart);
-                    
-                    if (frameDuration.count() < config.frameTimeTargetMs) {
-                        auto sleepTime = std::chrono::milliseconds(config.frameTimeTargetMs) - frameDuration;
-                        std::this_thread::sleep_for(sleepTime);
-                    }
-                    
-                    // Log slow frames
-                    if (config.logSlowFrames && frameDuration.count() > (config.frameTimeTargetMs * 2)) {
-                        AE_WARN("Slow frame detected: {}ms (target: {}ms)", 
-                               frameDuration.count(), config.frameTimeTargetMs);
-                    }
-                }
+
+            // Test 3D model loading with dependency injection (no global device hack)
+            auto modelAsset = std::make_shared<AstralEngine::ModelAsset>("models/viking_room.obj", renderer.GetDevice());
+            modelAsset->load();
+
+            if (modelAsset && modelAsset->isLoaded()) {
+                auto entity = scene.createEntity("Viking Room");
+                scene.addComponent<AstralEngine::ECS::Transform>(entity, glm::vec3(0.0f, 0.0f, 0.0f));
+                scene.addComponent<AstralEngine::ECS::RenderComponent>(entity, modelAsset);
+                AE_INFO("Test model 'viking_room.obj' loaded and added to scene.");
+            } else {
+                AE_ERROR("Failed to load test model 'viking_room.obj'.");
             }
 
-            AE_INFO("Ana döngü sona erdi (Toplam frame: {})", frameCount);
-            
-            // Final performance stats
-            if (config.enablePerformanceMonitoring) {
-                AE_INFO("Final Performance Statistics:");
-                AstralEngine::PerformanceMonitor::printStats();
+            AE_INFO("Main loop starting...");
+            while (!window.shouldClose()) {
+                AstralEngine::Memory::MemoryManager::getInstance().newFrame();
+                window.pollEvents();
+                
+                uiManager.BeginFrame();
+                uiManager.Render();
+
+                if (uiManager.GetAppState() == AstralEngine::UI::AppState::Editor2D) {
+                    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+                    ImGui::Begin("Canvas");
+                    {
+                        ImVec2 canvas_pos = ImGui::GetCursorScreenPos();
+                        if (ImGui::IsWindowHovered() && toolManager.getActiveTool()) {
+                            ImGuiIO& io = ImGui::GetIO();
+                            glm::vec2 mouse_pos = {io.MousePos.x - canvas_pos.x, io.MousePos.y - canvas_pos.y};
+                            if (ImGui::IsMouseDown(0)) {
+                                if (ImGui::IsMouseClicked(0)) { toolManager.getActiveTool()->onMouseDown(mouse_pos, canvasEntity); }
+                                toolManager.getActiveTool()->onMouseMove(mouse_pos, canvasEntity);
+                            } else if (ImGui::IsMouseReleased(0)) { 
+                                toolManager.getActiveTool()->onMouseUp(mouse_pos, canvasEntity);
+                            }
+                        }
+                    }
+                    ImGui::End();
+                    ImGui::PopStyleVar();
+
+                    // Note: canvasSystem.renderCanvas should be moved to CanvasPass
+                    // For now, keep it here but it should be integrated into Vulkan pipeline
+                    canvasSystem.renderCanvas(canvasEntity, layerSystem.getLayerStack());
+                    toolManager.render();
+                }
+                
+                // Render scene with ImGui integration - pass ImGui data to RenderGraph
+                renderer.DrawScene(scene, ImGui::GetDrawData());
             }
-            
-            // Shutdown UI system
-            uiManager.shutdown();
+
+            uiManager.Shutdown();
             
         } catch (const std::exception& e) {
-            AE_ERROR("Window/Renderer initialization hatası: {}", e.what());
+            AE_ERROR("Window/Renderer initialization error: {}", e.what());
             return 1;
         }
 
-        // Cleanup
-        try {
-            AE_DEBUG("AssetManager kapatılıyor...");
-            AstralEngine::AssetManager::shutdown();
-            AE_INFO("AssetManager başarıyla kapatıldı");
-            
-            // Performance monitoring cleanup
-            if (config.enablePerformanceMonitoring) {
-                AstralEngine::PerformanceMonitor::reset();
-            }
-            
-            // Event system cleanup
-            AE_DEBUG("Event system kapatılıyor...");
-            AstralEngine::ShutdownEventSystem();
-            
-            // Memory Manager cleanup
-            AE_DEBUG("Memory Manager kapatılıyor...");
-            AstralEngine::Memory::MemoryManager::getInstance().shutdown();
-            AE_INFO("Memory Manager başarıyla kapatıldı");
-            
-        } catch (const std::exception& e) {
-            AE_ERROR("AssetManager kapatılırken hata oluştu: {}", e.what());
-        }
+        AstralEngine::AssetManager::shutdown();
+        AstralEngine::ShutdownEventSystem();
+        AstralEngine::Memory::MemoryManager::getInstance().shutdown();
 
     } catch (const std::exception& e) {
-        AE_ERROR("Kritik bir hata oluştu: {}", e.what());
-        
-        // Debug bilgisi için stack trace açma
-        AE_DEBUG("Hata ayıklama için stack trace bilgisi:");
-        
-        // Logger'ı temizle
-        try {
-            AstralEngine::Logger::Shutdown();
-        } catch (...) {
-            // Hata olursa yok say
-        }
-        
+        AE_ERROR("A critical error occurred: {}", e.what());
+        AstralEngine::Logger::Shutdown();
         return 1;
     }
 
     AstralEngine::Logger::Shutdown();
-    AE_INFO("Astral Creative Suite başarıyla kapatıldı.");
+    AE_INFO("Astral Creative Suite has been shut down successfully.");
     return 0;
 }

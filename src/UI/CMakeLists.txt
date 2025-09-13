@@ -9,15 +9,17 @@ set(UI_HEADERS
 
 add_library(AstralUI ${UI_SOURCES} ${UI_HEADERS})
 
+# Define alias for better compatibility
+add_library(Astral::UI ALIAS AstralUI)
+
 # Link dependencies
 target_link_libraries(AstralUI PUBLIC
     AstralCore
+    AstralPlatform
+    AstralRenderer
+    AstralECS
+    imgui
 )
-
-# Conditionally link fmt if available
-if(TARGET fmt::fmt)
-    target_link_libraries(AstralUI PUBLIC fmt::fmt)
-endif()
 
 target_include_directories(AstralUI PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/../

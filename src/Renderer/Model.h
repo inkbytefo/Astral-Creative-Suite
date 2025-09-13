@@ -2,12 +2,9 @@
 
 #include <vector>
 #include <string>
+#include "Renderer/MaterialShaderManager.h"
 #include <memory>
 #include <unordered_map>
-#include <unordered_set>
-#include <functional>
-#include <atomic>
-#include <filesystem>
 #include <glm/glm.hpp>
 
 // Enable GLM hash functions for C++17
@@ -16,7 +13,9 @@
 #endif
 #include <glm/gtx/hash.hpp>
 #include <vulkan/vulkan.h>
-#include "Core/AssetDependency.h"
+
+// Forward declare ModelData to avoid circular dependency
+struct ModelData;
 
 namespace AstralEngine {
     // Forward declarations
@@ -25,9 +24,7 @@ namespace AstralEngine {
         class VulkanBuffer;
     }
     class UnifiedMaterialInstance;
-    class DependencyGraph;
-    class Texture;
-    class MaterialLibrary;
+    struct ModelData;
 
 	struct Vertex {
 		glm::vec3 position;
@@ -47,9 +44,6 @@ namespace AstralEngine {
 		static std::vector<VkVertexInputAttributeDescription> getAttributeDescriptions();
 	};
 
-	/**
-	 * @brief Represents a submesh with its own material and draw range
-	 */
 	struct SubMesh {
 		std::string name;
 		std::string materialName; // Reference to material by name
@@ -74,124 +68,32 @@ namespace std {
 }
 
 namespace AstralEngine {
+	// Represents the GPU-side data of a 3D model.
 	class Model {
 	public:
-		using LoadCompleteCallback = std::function<void(bool success, const std::string& error)>;
-
-		Model(Vulkan::VulkanDevice& device, const std::string& filepath);
+		Model(Vulkan::VulkanDevice& device, std::unique_ptr<ModelData> modelData);
 		~Model();
-
-		/**
-		 * @brief Load model with all dependencies asynchronously
-		 */
-		void loadAsync(LoadCompleteCallback callback);
-
-		/**
-		 * @brief Check if model and all dependencies are fully loaded
-		 */
-		bool isFullyLoaded() const;
-
-		/**
-		 * @brief Get loading progress (0.0 to 1.0)
-		 */
-		float getLoadingProgress() const;
 
 		void Bind(VkCommandBuffer commandBuffer);
 		void Draw(VkCommandBuffer commandBuffer);
-		
-		/**
-		 * @brief Draw specific submesh
-		 */
 		void DrawSubMesh(VkCommandBuffer commandBuffer, size_t submeshIndex);
 
-		uint32_t GetIndexCount() const { return static_cast<uint32_t>(indices.size()); }
-		const std::vector<std::string>& getTextureDependencies() const { return m_textureDependencies; }
-		
-		/**
-		 * @brief Get all submeshes
-		 */
-		const std::vector<SubMesh>& getSubMeshes() const { return m_subMeshes; }
-		
-		/**
-		 * @brief Get material by name (after loading is complete)
-		 */
-		std::shared_ptr<UnifiedMaterialInstance> getMaterial(const std::string& name) const;
-		
-		/**
-		 * @brief Get default material for submesh (fallback)
-		 */
-		std::shared_ptr<UnifiedMaterialInstance> getDefaultMaterial() const;
-		
-		/**
-		 * @brief Get all materials in this model
-		 */
-		const std::unordered_map<std::string, std::shared_ptr<UnifiedMaterialInstance>>& getMaterials() const;
-		
-		/**
-		 * @brief Get material for a specific submesh by index (fallback-safe)
-		 */
-		std::shared_ptr<UnifiedMaterialInstance> getSubmeshMaterial(uint32_t index) const;
-		
-		/**
-		 * @brief Check if materials are ready for rendering
-		 */
-		bool areMaterialsReady() const;
-		
-		/**
-		 * @brief Get material loading progress (0.0 to 1.0)
-		 */
-		float getMaterialLoadingProgress() const;
-		
-		/**
-		 * @brief Get number of submeshes in this model
-		 */
+		uint32_t getIndexCount() const;
 		size_t getSubmeshCount() const;
-		
-		/**
-		 * @brief Get submesh by index
-		 */
-		const SubMesh& getSubmesh(size_t index) const;
+		        const SubMesh& getSubmesh(size_t index) const;
+        std::shared_ptr<UnifiedMaterialInstance> getSubmeshMaterial(uint32_t index) const;
+
 
 	private:
-		void loadModel(const std::string& filepath);
 		void createVertexBuffers();
 		void createIndexBuffers();
-		void generateTangents(); // Calculate tangent/bitangent vectors
-		void loadMaterialsFromMTL(const std::string& mtlPath, const std::string& baseDir);
-		void createDefaultMaterial();
-		
-		// Enhanced material loading methods
-		void parseMTLFiles(const std::vector<std::string>& mtlFiles);
-		void collectTexturePathsFromMaterials();
-		void createLoadedMaterialInstances();
-		void createUnloadedMaterialInstances();
-		void bindMaterialsToSubmeshes();
-		std::string normalizeTexturePath(const std::string& basePath, const std::string& relativePath) const;
 
 		Vulkan::VulkanDevice& m_device;
-		std::string m_filepath;
-		std::string m_baseDirectory;
 		
-		// Geometry data
-		std::vector<Vertex> vertices;
-		std::vector<uint32_t> indices;
+		// Geometry data (moved from ModelData)
+		std::vector<Vertex> m_vertices;
+		std::vector<uint32_t> m_indices;
 		std::vector<SubMesh> m_subMeshes;
-		
-		// Material and dependency management
-		std::vector<std::string> m_textureDependencies; // Legacy - to be phased out
-		
-		// Enhanced material management
-		std::unordered_map<std::string, MaterialLibrary::MaterialInfo> m_materialInfos; // keyed by material name
-		std::unordered_map<std::string, std::shared_ptr<UnifiedMaterialInstance>> m_materials; // keyed by material name
-		std::unordered_map<std::string, std::string> m_materialNameToBaseDir; // handle multiple MTLs
-		std::unordered_map<std::string, std::shared_ptr<Texture>> m_loadedTextures; // keyed by normalized absolute path
-		std::unordered_set<std::string> m_texturePaths; // absolute, normalized
-		
-		std::shared_ptr<UnifiedMaterialInstance> m_defaultMaterial;
-		std::unique_ptr<DependencyGraph> m_dependencyGraph;
-		bool m_loadingComplete = false;
-		std::atomic<bool> m_materialsReady{false};
-		std::string m_modelDirectory; // model base path
 		
 		// Vulkan resources
 		std::unique_ptr<Vulkan::VulkanBuffer> m_vertexBuffer;

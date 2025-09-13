@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ECS/Components.h"
-#include "Renderer/Renderer.h"
+#include "Renderer/RRenderer.h"
 #include "Events/InputEvent.h"
 #include "2D/Layers/Layer.h"
 #include <glm/glm.hpp>
@@ -37,6 +37,7 @@ namespace AstralEngine {
         // Canvas system for rendering and interaction
         class CanvasSystem {
         public:
+            CanvasSystem(ECS::Scene& scene);
             CanvasSystem(ECS::Scene& scene, Renderer& renderer);
             ~CanvasSystem() = default;
             
@@ -61,7 +62,7 @@ namespace AstralEngine {
             
         private:
             ECS::Scene& m_scene;
-            Renderer& m_renderer;
+            Renderer* m_renderer; // Changed to pointer
             
             // Internal methods
             void updateCanvasTransform(ECS::EntityID canvasId);

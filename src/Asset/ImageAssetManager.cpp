@@ -1,7 +1,7 @@
 #include "Asset/ImageAssetManager.h"
 #include "Core/Logger.h"
 #include "Renderer/Texture.h"
-#include "Renderer/Renderer.h"
+#include "Renderer/RRenderer.h"
 #include <algorithm>
 #include <cctype>
 #include <filesystem>
@@ -226,9 +226,11 @@ namespace AstralEngine {
         }
         
         std::string ImageAssetManager::getExtension(const std::string& filepath) {
-            // Get file extension
-            std::filesystem::path path(filepath);
-            return path.extension().string();
+            std::string ext = std::filesystem::path(filepath).extension().string();
+            if (!ext.empty() && ext[0] == '.') {
+                return ext.substr(1); // Baştaki noktayı kaldır.
+            }
+            return ext;
         }
     }
 }

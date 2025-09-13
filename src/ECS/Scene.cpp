@@ -51,7 +51,6 @@ namespace AstralEngine::ECS {
     void Scene::update(float deltaTime) {
         // Update systems directly
         m_transformSystem.update(m_registry, deltaTime);
-        m_renderSystem.update(m_registry, deltaTime);
     }
 
     void Scene::setMainCamera(EntityID camera) {
@@ -69,7 +68,7 @@ namespace AstralEngine::ECS {
     }
 
     size_t Scene::getSystemCount() const {
-        return 2; // TransformSystem and RenderSystem
+        return 1; // TransformSystem only (RenderSystem removed)
     }
 
     void Scene::printDebugInfo() const {

@@ -1,9 +1,5 @@
 # Renderer library
 set(RENDERER_SOURCES
-    Renderer.cpp
-    RenderSystem.cpp
-    2D/CanvasRenderer.cpp
-    3D/SceneRenderer.cpp
     Camera.cpp
     MaterialShaderManager.cpp
     Model.cpp
@@ -18,10 +14,6 @@ set(RENDERER_SOURCES
 )
 
 set(RENDERER_HEADERS
-    Renderer.h
-    RenderSystem.h
-    2D/CanvasRenderer.h
-    3D/SceneRenderer.h
     Camera.h
     MaterialShaderManager.h
     Model.h
@@ -32,31 +24,35 @@ set(RENDERER_HEADERS
     Texture.h
     UnifiedMaterial.h
     UnifiedMaterialConstants.h
-    VMA_Implementation.cpp
 )
 
-# Add Vulkan sources
+# Add refactored Vulkan sources
 list(APPEND RENDERER_SOURCES
-    Vulkan/DescriptorSetManager.cpp
-    Vulkan/VulkanBuffer.cpp
-    Vulkan/VulkanDevice.cpp
-    Vulkan/VulkanPipeline.cpp
-    Vulkan/VulkanSwapChain.cpp
-    Vulkan/VulkanUtils.cpp
+    # Refactored Vulkan sources
+    VulkanR/VulkanInstance.cpp
+    VulkanR/VulkanPhysicalDevice.cpp
+    VulkanR/VulkanDevice.cpp
+    VulkanR/VulkanSwapChain.cpp
+    VulkanR/VulkanContext.cpp
+    RRenderer.cpp
 )
 
 list(APPEND RENDERER_HEADERS
-    Vulkan/DescriptorSetManager.h
-    Vulkan/VulkanBuffer.h
-    Vulkan/VulkanContext.h
-    Vulkan/VulkanDevice.h
-    Vulkan/VulkanPipeline.h
-    Vulkan/VulkanSwapChain.h
-    Vulkan/VulkanUtils.h
+    # Refactored Vulkan headers
+    VulkanR/VulkanInstance.h
+    VulkanR/VulkanValidation.h
+    VulkanR/VulkanPhysicalDevice.h
+    VulkanR/VulkanDevice.h
+    VulkanR/VulkanSwapChain.h
+    VulkanR/VulkanContext.h
+    RRenderer.h
 )
 
 # Create the AstralRenderer library
 add_library(AstralRenderer ${RENDERER_SOURCES} ${RENDERER_HEADERS})
+
+# Define alias for better compatibility
+add_library(Astral::Renderer ALIAS AstralRenderer)
 
 # Link dependencies
 target_link_libraries(AstralRenderer PUBLIC
@@ -64,6 +60,9 @@ target_link_libraries(AstralRenderer PUBLIC
     SDL3::SDL3
     tinyobjloader
     stb_image
+    AstralCore
+    AstralECS
+    imgui
 )
 
 # Conditionally link fmt if available
@@ -78,6 +77,8 @@ target_include_directories(AstralRenderer PUBLIC
     ${PROJECT_SOURCE_DIR}/external/glm
     ${PROJECT_SOURCE_DIR}/external/tinyobjloader
     ${PROJECT_SOURCE_DIR}/external/vma/include
+    ${imgui_SOURCE_DIR}
+    ${imgui_SOURCE_DIR}/backends
 )
 
 # Compiler definitions

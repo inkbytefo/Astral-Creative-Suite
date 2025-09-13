@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASTRAL_ENGINE_EVENT_MANAGER_H
+#define ASTRAL_ENGINE_EVENT_MANAGER_H
 
 #include "Event.h"
 #include "Core/Logger.h"
@@ -273,3 +274,5 @@ namespace AstralEngine {
     }
 
 } // namespace AstralEngine
+
+#endif // ASTRAL_ENGINE_EVENT_MANAGER_H

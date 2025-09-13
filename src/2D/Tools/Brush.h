@@ -2,6 +2,8 @@
 
 #include "ECS/Components.h"
 #include "2D/Layers/Layer.h"
+#include "2D/Tools/Tool.h" // Include the base class definition
+#include "2D/Layers/Layer.h"
 #include <glm/glm.hpp>
 #include <vector>
 #include <memory>
@@ -72,6 +74,7 @@ namespace AstralEngine {
             // Get current brush
             BrushTool& getCurrentBrush() { return m_currentBrush; }
             const BrushTool& getCurrentBrush() const { return m_currentBrush; }
+            const BrushStroke& getCurrentStroke() const { return m_currentStroke; }
             
         private:
             ECS::Scene& m_scene;
@@ -82,6 +85,26 @@ namespace AstralEngine {
             // Internal methods
             void rasterizeStroke(ECS::EntityID layerId, const BrushStroke& stroke);
             glm::vec4 sampleBrushTexture(const glm::vec2& uv);
+        };
+
+        // Brush tool
+        class BrushTool2D : public Tool {
+        public:
+            BrushTool2D(BrushSystem& brushSystem, LayerSystem& layerSystem) : Tool("Brush"), m_brushSystem(brushSystem), m_layerSystem(layerSystem) {}
+            
+            void activate() override;
+            void deactivate() override;
+            void onMouseDown(const glm::vec2& position, ECS::EntityID canvasId) override;
+            void onMouseUp(const glm::vec2& position, ECS::EntityID canvasId) override;
+            void onMouseMove(const glm::vec2& position, ECS::EntityID canvasId) override;
+            void render() override;
+
+            BrushSystem& getBrushSystem() { return m_brushSystem; }
+            
+        private:
+            BrushSystem& m_brushSystem;
+            LayerSystem& m_layerSystem;
+            bool m_drawing = false;
         };
     }
 }

@@ -1,48 +1,69 @@
 cmake_minimum_required(VERSION 3.20)
-project(AstralEngine VERSION 1.0.0 LANGUAGES CXX)
+project(AstralCreativeSuite VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Vulkan SDK'nın konumunu belirt (ortam değişkeni veya sabit yol)
+add_definitions(-DGLM_ENABLE_EXPERIMENTAL)
+
+# Find Vulkan
+find_package(Vulkan REQUIRED COMPONENTS glslc glslangValidator)
+
+# Vulkan SDK paths
 set(VULKAN_SDK $ENV{VULKAN_SDK})
-if(NOT VULKAN_SDK)
-    message(FATAL_ERROR "VULKAN_SDK ortam değişkeni bulunamadı! Lütfen Vulkan SDK'yı yükleyin ve ortam değişkenini ayarlayın.")
+if(VULKAN_SDK)
+    message(STATUS "Vulkan SDK found at: ${VULKAN_SDK}")
+    include_directories(${VULKAN_SDK}/Include)
+    link_directories(${VULKAN_SDK}/Lib)
 endif()
 
-# Vulkan SDK header ve library yollarını ekle
-include_directories(${VULKAN_SDK}/Include)
-link_directories(${VULKAN_SDK}/Lib)
-
-# --- Vulkan SDK'nın CMake desteğini bul ---
-# Bu, Vulkan::Vulkan hedefini tanımlar
-find_package(Vulkan REQUIRED)
-
 # --- SDL3 Kütüphanesini Tanımla ---
-# SDL3'ü external klasöründen kullanmak için CMake yapılandırması
 set(SDL3_DIR ${PROJECT_SOURCE_DIR}/external/SDL3/cmake)
 if(EXISTS ${SDL3_DIR})
     find_package(SDL3 REQUIRED CONFIG PATHS ${SDL3_DIR})
 else()
-    # Fallback to system SDL3 if external is not available
     find_package(SDL3 REQUIRED)
 endif()
 
-# --- fmt Kütüphanesini Tanımla ---
-# Check if fmt exists in external, otherwise use system
-if(EXISTS ${PROJECT_SOURCE_DIR}/external/fmt AND IS_DIRECTORY ${PROJECT_SOURCE_DIR}/external/fmt)
-    add_subdirectory(external/fmt)
-    set(FMT_FOUND TRUE)
-else()
-    # Try to find system fmt
-    find_package(fmt QUIET)
-    if(fmt_FOUND)
-        set(FMT_FOUND TRUE)
-    else()
-        set(FMT_FOUND FALSE)
-    endif()
-endif()
+include(FetchContent)
+
+# --- fmt Kütüphanesini Tanımla (FetchContent) ---
+FetchContent_Declare(
+  fmt
+  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+  GIT_TAG 10.2.1 # Or a specific commit/tag you prefer
+)
+FetchContent_MakeAvailable(fmt)
+
+# --- ImGui Kütüphanesini Manuel Olarak Oluştur ---
+FetchContent_Declare(
+  imgui
+  GIT_REPOSITORY https://github.com/ocornut/imgui.git
+  GIT_TAG v1.89.9
+)
+FetchContent_MakeAvailable(imgui)
+
+# ImGui library oluştur
+add_library(imgui STATIC)
+target_sources(imgui PRIVATE
+    ${imgui_SOURCE_DIR}/imgui.cpp
+    ${imgui_SOURCE_DIR}/imgui_demo.cpp
+    ${imgui_SOURCE_DIR}/imgui_draw.cpp
+    ${imgui_SOURCE_DIR}/imgui_tables.cpp
+    ${imgui_SOURCE_DIR}/imgui_widgets.cpp
+    ${imgui_SOURCE_DIR}/backends/imgui_impl_vulkan.cpp
+    ${imgui_SOURCE_DIR}/backends/imgui_impl_sdl3.cpp
+)
+
+target_include_directories(imgui PUBLIC 
+    ${imgui_SOURCE_DIR}
+    ${imgui_SOURCE_DIR}/backends
+    ${VULKAN_SDK}/Include
+)
+
+target_link_libraries(imgui PUBLIC Vulkan::Vulkan SDL3::SDL3)
+target_compile_definitions(imgui PUBLIC IMGUI_IMPL_VULKAN_LOG_FATAL_ERROR)
 
 # --- Harici Kütüphaneleri Tanımla ---
 # Check if tinyobjloader exists in external, otherwise it might be system
@@ -67,30 +88,37 @@ add_subdirectory(src)
 # New 2D graphics editor executable
 add_executable(AstralCreativeSuite src/editor_main.cpp)
 
+# New 3D editor executable
+add_executable(Astral3DEditor src/3d_editor_main.cpp)
+
 # --- Çalıştırılabilir Dosyaların Bağımlılıklarını Belirt ---
 target_link_libraries(AstralCreativeSuite PRIVATE 
-    AstralECS
-    AstralEvents
-    AstralPlatform
-    AstralRenderer
-    AstralUI
-    Astral2D
-    AstralAsset
+    AstralEngine
     Vulkan::Vulkan
     SDL3::SDL3
-    tinyobjloader
-    stb_image
+    fmt::fmt
+    imgui
 )
 
-# Add fmt if found
-if(FMT_FOUND)
-    target_link_libraries(AstralCreativeSuite PRIVATE fmt::fmt)
-endif()
+target_link_libraries(Astral3DEditor PRIVATE 
+    AstralEngine
+    Vulkan::Vulkan
+    SDL3::SDL3
+    fmt::fmt
+    imgui
+)
 
 # GLM'in deneysel özelliklerini kullanmak için bu tanımı ekleyin
 target_compile_definitions(AstralCreativeSuite PRIVATE GLM_ENABLE_EXPERIMENTAL)
 
 target_include_directories(AstralCreativeSuite PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${PROJECT_SOURCE_DIR}/external/glm
+    ${PROJECT_SOURCE_DIR}/external/tinyobjloader
+    ${PROJECT_SOURCE_DIR}/external/vma/include # VMA için 'include' alt klasörünü belirtiyoruz
+)
+
+target_include_directories(Astral3DEditor PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${PROJECT_SOURCE_DIR}/external/glm
     ${PROJECT_SOURCE_DIR}/external/tinyobjloader
@@ -119,107 +147,40 @@ add_custom_command(
     COMMENT "Assets kopyalanıyor (AstralCreativeSuite)..."
 )
 
-# Shader compilation section - only compile 2D shaders for the creative suite
+# ==============================================================================
+# SHADER COMPILATION (AUTOMATED)
+# ==============================================================================
 set(SHADERS_SRC_DIR "${CMAKE_SOURCE_DIR}/shaders")
 set(SPV_OUTPUT_DIR "${CMAKE_BINARY_DIR}/shaders_spv")
-
-# Ensure output directory exists
 file(MAKE_DIRECTORY ${SPV_OUTPUT_DIR})
 
 # Find glslc (ShaderC compiler)
 find_program(GLSLC_EXECUTABLE NAMES glslc HINTS ${VULKAN_SDK}/bin)
-
 if(NOT GLSLC_EXECUTABLE)
-    message(FATAL_ERROR "glslc not found! Please install Vulkan SDK.")
+    message(FATAL_ERROR "glslc not found! Please install Vulkan SDK and ensure it's in your PATH.")
 endif()
 
-# 2D Canvas shaders
-add_custom_command(
-    OUTPUT "${SPV_OUTPUT_DIR}/2d_canvas.vert.spv"
-    COMMAND ${GLSLC_EXECUTABLE} "${SHADERS_SRC_DIR}/2d_canvas.vert" -o "${SPV_OUTPUT_DIR}/2d_canvas.vert.spv"
-    DEPENDS "${SHADERS_SRC_DIR}/2d_canvas.vert"
-    COMMENT "glslc 2d_canvas.vert -> 2d_canvas.vert.spv"
+# Find all vertex and fragment shaders
+file(GLOB SHADER_SOURCES 
+    "${SHADERS_SRC_DIR}/*.vert"
+    "${SHADERS_SRC_DIR}/*.frag"
 )
 
-add_custom_command(
-    OUTPUT "${SPV_OUTPUT_DIR}/2d_canvas.frag.spv"
-    COMMAND ${GLSLC_EXECUTABLE} "${SHADERS_SRC_DIR}/2d_canvas.frag" -o "${SPV_OUTPUT_DIR}/2d_canvas.frag.spv"
-    DEPENDS "${SHADERS_SRC_DIR}/2d_canvas.frag"
-    COMMENT "glslc 2d_canvas.frag -> 2d_canvas.frag.spv"
-)
+set(SPV_OUTPUTS "") # Initialize list of compiled shaders
 
-# 2D Brush shaders
-add_custom_command(
-    OUTPUT "${SPV_OUTPUT_DIR}/2d_brush.vert.spv"
-    COMMAND ${GLSLC_EXECUTABLE} "${SHADERS_SRC_DIR}/2d_brush.vert" -o "${SPV_OUTPUT_DIR}/2d_brush.vert.spv"
-    DEPENDS "${SHADERS_SRC_DIR}/2d_brush.vert"
-    COMMENT "glslc 2d_brush.vert -> 2d_brush.vert.spv"
-)
+# Loop through all found shaders and create compilation commands
+foreach(SHADER_SOURCE_PATH ${SHADER_SOURCES})
+    get_filename_component(SHADER_NAME ${SHADER_SOURCE_PATH} NAME)
+    set(SPV_OUTPUT_PATH "${SPV_OUTPUT_DIR}/${SHADER_NAME}.spv")
 
-add_custom_command(
-    OUTPUT "${SPV_OUTPUT_DIR}/2d_brush.frag.spv"
-    COMMAND ${GLSLC_EXECUTABLE} "${SHADERS_SRC_DIR}/2d_brush.frag" -o "${SPV_OUTPUT_DIR}/2d_brush.frag.spv"
-    DEPENDS "${SHADERS_SRC_DIR}/2d_brush.frag"
-    COMMENT "glslc 2d_brush.frag -> 2d_brush.frag.spv"
-)
-
-# 2D Grid shaders
-add_custom_command(
-    OUTPUT "${SPV_OUTPUT_DIR}/2d_grid.vert.spv"
-    COMMAND ${GLSLC_EXECUTABLE} "${SHADERS_SRC_DIR}/2d_grid.vert" -o "${SPV_OUTPUT_DIR}/2d_grid.vert.spv"
-    DEPENDS "${SHADERS_SRC_DIR}/2d_grid.vert"
-    COMMENT "glslc 2d_grid.vert -> 2d_grid.vert.spv"
-)
-
-add_custom_command(
-    OUTPUT "${SPV_OUTPUT_DIR}/2d_grid.frag.spv"
-    COMMAND ${GLSLC_EXECUTABLE} "${SHADERS_SRC_DIR}/2d_grid.frag" -o "${SPV_OUTPUT_DIR}/2d_grid.frag.spv"
-    DEPENDS "${SHADERS_SRC_DIR}/2d_grid.frag"
-    COMMENT "glslc 2d_grid.frag -> 2d_grid.frag.spv"
-)
-
-# 3D Shaders (for backward compatibility)
-add_custom_command(
-    OUTPUT "${SPV_OUTPUT_DIR}/unified_pbr.vert.spv"
-    COMMAND ${GLSLC_EXECUTABLE} "${SHADERS_SRC_DIR}/unified_pbr.vert" -o "${SPV_OUTPUT_DIR}/unified_pbr.vert.spv"
-    DEPENDS "${SHADERS_SRC_DIR}/unified_pbr.vert"
-    COMMENT "glslc unified_pbr.vert -> unified_pbr.vert.spv"
-)
-
-add_custom_command(
-    OUTPUT "${SPV_OUTPUT_DIR}/unified_pbr.frag.spv"
-    COMMAND ${GLSLC_EXECUTABLE} "${SHADERS_SRC_DIR}/unified_pbr.frag" -o "${SPV_OUTPUT_DIR}/unified_pbr.frag.spv"
-    DEPENDS "${SHADERS_SRC_DIR}/unified_pbr.frag"
-    COMMENT "glslc unified_pbr.frag -> unified_pbr.frag.spv"
-)
-
-add_custom_command(
-    OUTPUT "${SPV_OUTPUT_DIR}/basic.vert.spv"
-    COMMAND ${GLSLC_EXECUTABLE} "${SHADERS_SRC_DIR}/basic.vert" -o "${SPV_OUTPUT_DIR}/basic.vert.spv"
-    DEPENDS "${SHADERS_SRC_DIR}/basic.vert"
-    COMMENT "glslc basic.vert -> basic.vert.spv"
-)
-
-add_custom_command(
-    OUTPUT "${SPV_OUTPUT_DIR}/basic.frag.spv"
-    COMMAND ${GLSLC_EXECUTABLE} "${SHADERS_SRC_DIR}/basic.frag" -o "${SPV_OUTPUT_DIR}/basic.frag.spv"
-    DEPENDS "${SHADERS_SRC_DIR}/basic.frag"
-    COMMENT "glslc basic.frag -> basic.frag.spv"
-)
-
-# Collect all shader outputs
-set(SPV_OUTPUTS
-    "${SPV_OUTPUT_DIR}/2d_canvas.vert.spv"
-    "${SPV_OUTPUT_DIR}/2d_canvas.frag.spv"
-    "${SPV_OUTPUT_DIR}/2d_brush.vert.spv"
-    "${SPV_OUTPUT_DIR}/2d_brush.frag.spv"
-    "${SPV_OUTPUT_DIR}/2d_grid.vert.spv"
-    "${SPV_OUTPUT_DIR}/2d_grid.frag.spv"
-    "${SPV_OUTPUT_DIR}/unified_pbr.vert.spv"
-    "${SPV_OUTPUT_DIR}/unified_pbr.frag.spv"
-    "${SPV_OUTPUT_DIR}/basic.vert.spv"
-    "${SPV_OUTPUT_DIR}/basic.frag.spv"
-)
+    add_custom_command(
+        OUTPUT ${SPV_OUTPUT_PATH}
+        COMMAND ${GLSLC_EXECUTABLE} ${SHADER_SOURCE_PATH} -o ${SPV_OUTPUT_PATH}
+        DEPENDS ${SHADER_SOURCE_PATH}
+        COMMENT "Compiling ${SHADER_NAME} -> ${SHADER_NAME}.spv"
+    )
+    list(APPEND SPV_OUTPUTS ${SPV_OUTPUT_PATH})
+endforeach()
 
 # Custom target to build all shaders
 add_custom_target(shaders ALL DEPENDS ${SPV_OUTPUTS})

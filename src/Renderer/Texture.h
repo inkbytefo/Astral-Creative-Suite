@@ -7,7 +7,9 @@ namespace AstralEngine {
     }
 }
 #include <vulkan/vulkan.h>
-#include <vk_mem_alloc.h>
+#pragma once
+
+#include "Renderer/VulkanR/Vulkan.h"
 #include <string>
 #include "Renderer/UnifiedMaterialConstants.h"
 
